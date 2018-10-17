@@ -92,7 +92,7 @@ namespace HumaneSociety
             }
         }
 
-        internal static void updateClient(Client client)
+        internal static void updateClient(Client client) // Why not updateIncome/NumberOfKids/HomeSquareFootage????
         {
             throw new NotImplementedException();
         }
