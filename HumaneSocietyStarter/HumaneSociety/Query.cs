@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace HumaneSociety
-{ 
+{
     public static class Query
     {
         private static HumaneSocietyDataContext db = new HumaneSocietyDataContext();
@@ -82,7 +82,7 @@ namespace HumaneSociety
                 db.SubmitChanges();
                 Console.WriteLine("Cleint added");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
@@ -125,12 +125,45 @@ namespace HumaneSociety
 
         internal static void RemoveAnimal(Animal animal)
         {
-            throw new NotImplementedException();
+            db.Animals.DeleteOnSubmit(animal);
+            db.SubmitChanges();
+            // null checking
         }
 
         internal static Species GetSpecies()
         {
-            throw new NotImplementedException();
+            int counter = 1;
+            Console.WriteLine("Please select the animal's species: \n");
+
+            foreach (Species s in db.Species)
+            {
+                Console.WriteLine(counter + "- " + s.Name + "\n");
+                counter++;
+            }
+            Console.WriteLine((counter+1) + "- Species Not Listed");
+            string input = UserInterface.GetStringData("menu number", "species");
+
+            // create species if this option is selected
+            if (Int32.Parse(input) == counter+1)
+            {
+                return CreateSpecies();
+            }
+            
+            foreach (Species s in db.Species)
+            {
+                if (input == s.Name)
+                {
+                    return s;
+                }
+            }
+        }
+
+        internal static Species CreateSpecies()
+        {
+            Species newSpecies = new Species();
+            return newSpecies;
+
+            // CHANGE
         }
 
         internal static DietPlan GetDietPlan()
@@ -145,22 +178,14 @@ namespace HumaneSociety
 
         internal static Employee EmployeeLogin(string userName, string password)
         {
-            var Employee = db.Employees.Where(x => x.UserName == userName && x.Password == password);     
-            if (Employee.Count() > 1)
-            {
-                throw new Exception();
-            }
-            return Employee.ElementAt(0);
+            var Employee = db.Employees.Where(x => x.UserName == userName && x.Password == password);
+            return Employee.Single();
         }
 
         internal static Employee RetrieveEmployeeUser(string email, int? employeeNumber)
         {
             var Employee = db.Employees.Where(e => e.Email == email && e.EmployeeNumber == employeeNumber);
-            if (Employee.Count() > 1)
-            {
-                throw new Exception();
-            }
-            return Employee.ElementAt(0);
+            return Employee.Single();
             // Null Check
         }
 
@@ -178,10 +203,12 @@ namespace HumaneSociety
         {
             RetrieveEmployeeUser(employee.Email, employee.EmployeeNumber).UserName = employee.UserName;
             RetrieveEmployeeUser(employee.Email, employee.EmployeeNumber).Password = employee.Password;
+            // Null Check
         }
 
         internal static bool CheckEmployeeUserNameExist(string username)
         {
+            // Null Check
             var nameExists = db.Employees.Where(e => e.UserName == username);
             if (nameExists.Count() > 0)
             {
