@@ -42,17 +42,50 @@ namespace HumaneSociety
 
         internal static IQueryable<Client> RetrieveClients()
         {
-            throw new NotImplementedException();
+            return db.Clients;
         }
 
         internal static IQueryable<USState> GetStates()
         {
-            throw new NotImplementedException();
+            return db.USStates;
         }
 
         internal static void AddNewClient(string firstName, string lastName, string username, string password, string email, string streetAddress, int zipCode, int state)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("In AddNewClient");
+            // TODO make this into 2 methods
+            Address address = new Address();
+            address.AddressLine1 = streetAddress;
+            address.Zipcode = zipCode;
+            address.USStateId = db.USStates.ElementAt(state).USStateId;
+            db.Addresses.InsertOnSubmit(address);
+            try
+            {
+                db.SubmitChanges();
+                Console.WriteLine("Address Added");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+            Client client = new Client();
+            client.FirstName = firstName;
+            client.LastName = lastName;
+            client.UserName = username;
+            client.Password = password;
+            client.Email = email;
+            client.AddressId = address.AddressId;
+            db.Clients.InsertOnSubmit(client);
+            try
+            {
+                db.SubmitChanges();
+                Console.WriteLine("Cleint added");
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         internal static void updateClient(Client client)
