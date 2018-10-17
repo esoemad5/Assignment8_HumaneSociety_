@@ -21,11 +21,11 @@ new Room() {RoomNumber = 2, AnimalId = 2};
 new Room() {RoomNumber = 3, AnimalId = 3};
 new Room() {RoomNumber = 4, AnimalId = 4};
 new Room() {RoomNumber = 5, AnimalId = 5};
-new Room() {RoomNumber = 6, AnimalId = };
-new Room() {RoomNumber = 7, AnimalId = };
-new Room() {RoomNumber = 8, AnimalId = };
-new Room() {RoomNumber = 9, AnimalId = };
-new Room() {RoomNumber = 10, AnimalId = };
+new Room() {RoomNumber = 6, AnimalId = 1};
+new Room() {RoomNumber = 7, AnimalId = 2};
+new Room() {RoomNumber = 8, AnimalId = 3};
+new Room() {RoomNumber = 9, AnimalId = 4};
+new Room() {RoomNumber = 10, AnimalId = 5};
 
 new Shot() {Name = "Flu"};
 new Shot() {Name = "Hepatitis"};
