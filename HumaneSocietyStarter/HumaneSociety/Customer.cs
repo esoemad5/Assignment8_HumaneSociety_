@@ -35,8 +35,10 @@ namespace HumaneSociety
                 client = Query.GetClient(userName, password);
                 name = client.FirstName;
             }
-            catch
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
+                Console.WriteLine(e.StackTrace);
                 UserInterface.DisplayUserOptions("User not found. Please try another username, contact support or type 'reset' to restart");
                 LogIn();
                 return;
