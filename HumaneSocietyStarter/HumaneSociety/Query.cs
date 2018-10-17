@@ -18,11 +18,10 @@ namespace HumaneSociety
         internal static Client GetClient(string userName, string password)
         {
             Client outputClient = db.Clients.
-                Where(u => u.UserName == userName && u.Password == password)
+                Where(u => u.UserName == userName && u.Password == password).
                 /*Could put .AsEnumerable() here. Doesn't seem neccesary. Might not be the case elsewhere*/
-                .Single();
+                Single();
             return outputClient;
-            
         }
 
         internal static IQueryable<Adoption> GetUserAdoptionStatus(Client client)
@@ -93,19 +92,35 @@ namespace HumaneSociety
             }
         }
 
-        internal static void updateClient(Client client)
+        internal static void updateClient(Client client) // Why not updateIncome/NumberOfKids/HomeSquareFootage????
         {
             throw new NotImplementedException();
         }
 
         internal static void UpdateUsername(Client client)
         {
-            throw new NotImplementedException();
+            db.Clients.Where(c => c.ClientId == client.ClientId).Single().UserName = client.UserName;
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         internal static void UpdateEmail(Client client)
         {
-            throw new NotImplementedException();
+            db.Clients.Where(c => c.ClientId == client.ClientId).Single().Email = client.Email;
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         internal static void UpdateAddress(Client client)
@@ -120,12 +135,28 @@ namespace HumaneSociety
 
         internal static void UpdateFirstName(Client client)
         {
-            throw new NotImplementedException();
+            db.Clients.Where(c => c.ClientId == client.ClientId).Single().FirstName = client.FirstName;
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         internal static void UpdateLastName(Client client)
         {
-            throw new NotImplementedException();
+            db.Clients.Where(c => c.ClientId == client.ClientId).Single().LastName = client.LastName;
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         internal static void RemoveAnimal(Animal animal)
