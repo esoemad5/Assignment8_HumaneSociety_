@@ -112,7 +112,12 @@ namespace HumaneSociety
 
         internal static Employee EmployeeLogin(string userName, string password)
         {
-            throw new NotImplementedException();
+            var test = db.Employees.Where(x => x.UserName == userName && x.Password == password);     
+            if (test.Count() > 1)
+            {
+                throw new Exception();
+            }
+            return test.ElementAt(0);
         }
 
         internal static Employee RetrieveEmployeeUser(string email, int employeeNumber)

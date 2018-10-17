@@ -87,3 +87,6 @@ VALUES ('Rabies');
 
 INSERT INTO Shot (Name)
 VALUES ('Cancer');
+
+INSERT INTO Employees(FirstName, LastName, UserName, Password, EmployeeNumber, Email)
+VALUES ('Josh', 'Stoltenberg', 'Stoltmeister', 'abc123', 2, 'abc123@gmail.com');
