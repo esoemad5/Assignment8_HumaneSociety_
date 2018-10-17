@@ -137,6 +137,44 @@ namespace HumaneSociety
 
         internal static Species GetSpecies()
         {
+            foreach (Species s in db.Species.Where(s => true))
+            {
+                Console.WriteLine(s.Name);
+            }
+            Console.ReadLine();
+            List<Species> allSpecies = new List<Species>();
+            foreach (Species s in db.Species)
+            {
+                allSpecies.Add(s);
+            }
+            Species newSpecies;
+            DisplaySpeciesOptions();
+            string input = UserInterface.GetStringData("menu number", "species");
+            
+            // try - catch
+            try
+            {
+                if (Int32.Parse(input) >= allSpecies.Count)
+                {
+                    return CreateSpecies();
+                }
+                else
+                {
+                    newSpecies = allSpecies[Int32.Parse(input)];
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Clear();
+                Console.WriteLine("Incorrect input please try again! \n");
+                GetSpecies();
+            }
+
+            return null;
+        }
+
+        internal static void DisplaySpeciesOptions()
+        {
             int counter = 1;
             Console.WriteLine("Please select the animal's species: \n");
 
@@ -145,31 +183,14 @@ namespace HumaneSociety
                 Console.WriteLine(counter + "- " + s.Name + "\n");
                 counter++;
             }
-            Console.WriteLine((counter+1) + "- Species Not Listed");
-            string input = UserInterface.GetStringData("menu number", "species");
-
-            // create species if this option is selected
-            if (Int32.Parse(input) == counter+1)
-            {
-                return CreateSpecies();
-            }
-            
-            foreach (Species s in db.Species)
-            {
-                if (input == s.Name)
-                {
-                    return s;
-                }
-            }
-            return null;
+            Console.WriteLine((counter + 1) + "- Species Not Listed");
         }
 
         internal static Species CreateSpecies()
         {
             Species newSpecies = new Species();
-            return newSpecies;
-
-            // CHANGE
+            newSpecies.Name = UserInterface.GetStringData("name of", "species");
+            return newSpecies;            
         }
 
         internal static DietPlan GetDietPlan()
