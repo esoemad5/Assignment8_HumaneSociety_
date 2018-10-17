@@ -99,12 +99,28 @@ namespace HumaneSociety
 
         internal static void UpdateUsername(Client client)
         {
-            throw new NotImplementedException();
+            db.Clients.Where(c => c.ClientId == client.ClientId).Single().UserName = client.UserName;
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         internal static void UpdateEmail(Client client)
         {
-            throw new NotImplementedException();
+            db.Clients.Where(c => c.ClientId == client.ClientId).Single().Email = client.Email;
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         internal static void UpdateAddress(Client client)
@@ -132,7 +148,15 @@ namespace HumaneSociety
 
         internal static void UpdateLastName(Client client)
         {
-            throw new NotImplementedException();
+            db.Clients.Where(c => c.ClientId == client.ClientId).Single().LastName = client.LastName;
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         internal static void RemoveAnimal(Animal animal)
