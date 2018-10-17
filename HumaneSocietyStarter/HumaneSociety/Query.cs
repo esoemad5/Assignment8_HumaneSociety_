@@ -18,11 +18,10 @@ namespace HumaneSociety
         internal static Client GetClient(string userName, string password)
         {
             Client outputClient = db.Clients.
-                Where(u => u.UserName == userName && u.Password == password)
+                Where(u => u.UserName == userName && u.Password == password).
                 /*Could put .AsEnumerable() here. Doesn't seem neccesary. Might not be the case elsewhere*/
-                .Single();
+                Single();
             return outputClient;
-            
         }
 
         internal static IQueryable<Adoption> GetUserAdoptionStatus(Client client)
