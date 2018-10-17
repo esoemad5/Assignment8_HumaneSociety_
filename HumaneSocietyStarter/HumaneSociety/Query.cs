@@ -119,7 +119,19 @@ namespace HumaneSociety
 
         internal static void UpdateFirstName(Client client)
         {
-            throw new NotImplementedException();
+            db.Clients.Where(c => c.ClientId == client.ClientId).Single().FirstName = client.FirstName;
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
+
+            Console.WriteLine("End of test.");
+            Console.ReadKey();
         }
 
         internal static void UpdateLastName(Client client)

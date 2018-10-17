@@ -468,7 +468,9 @@ namespace HumaneSociety
             {
                 UserInterface.DisplayUserOptions("Please enter your new first name.");
                 client.FirstName = UserInterface.GetUserInput();
+                Console.WriteLine("Hello");
                 Query.UpdateFirstName(client);
+                Console.WriteLine("World!");
 
             }
             else if (input == "last" || input == "2")
