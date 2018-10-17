@@ -120,7 +120,7 @@ namespace HumaneSociety
             return Employee.ElementAt(0);
         }
 
-        internal static Employee RetrieveEmployeeUser(string email, int employeeNumber)
+        internal static Employee RetrieveEmployeeUser(string email, int? employeeNumber)
         {
             var Employee = db.Employees.Where(e => e.Email == email && e.EmployeeNumber == employeeNumber);
             if (Employee.Count() > 1)
@@ -143,7 +143,8 @@ namespace HumaneSociety
 
         internal static void AddUsernameAndPassword(Employee employee)
         {
-            throw new NotImplementedException();
+            RetrieveEmployeeUser(employee.Email, employee.EmployeeNumber).UserName = employee.UserName;
+            RetrieveEmployeeUser(employee.Email, employee.EmployeeNumber).Password = employee.Password;
         }
 
         internal static bool CheckEmployeeUserNameExist(string username)
