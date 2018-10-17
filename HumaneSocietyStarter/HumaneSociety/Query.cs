@@ -128,10 +128,6 @@ namespace HumaneSociety
             {
                 Console.WriteLine(e.Message);
             }
-
-
-            Console.WriteLine("End of test.");
-            Console.ReadKey();
         }
 
         internal static void UpdateLastName(Client client)
