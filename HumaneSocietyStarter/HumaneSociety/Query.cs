@@ -20,32 +20,32 @@ namespace HumaneSociety
             throw new NotImplementedException();
         }
 
-        internal static object GetUserAdoptionStatus(Client client)
+        internal static IQueryable<Adoption> GetUserAdoptionStatus(Client client)
         {
             throw new NotImplementedException();
         }
 
-        internal static object GetAnimalByID(int iD)
+        internal static Animal GetAnimalByID(int iD)
         {
             throw new NotImplementedException();
         }
 
-        internal static void Adopt(object animal, Client client)
+        internal static void Adopt(Animal animal, Client client)
         {
             throw new NotImplementedException();
         }
 
-        internal static object SearchForAnimalByMultipleTraits()
+        internal static IQueryable<Animal> SearchForAnimalByMultipleTraits()
         {
             throw new NotImplementedException();
         }
 
-        internal static object RetrieveClients()
+        internal static IQueryable<Client> RetrieveClients()
         {
             throw new NotImplementedException();
         }
 
-        internal static object GetStates()
+        internal static IQueryable<USState> GetStates()
         {
             throw new NotImplementedException();
         }
@@ -75,7 +75,7 @@ namespace HumaneSociety
             throw new NotImplementedException();
         }
 
-        internal static object GetPendingAdoptions()
+        internal static IQueryable<Adoption> GetPendingAdoptions()
         {
             throw new NotImplementedException();
         }
@@ -90,7 +90,7 @@ namespace HumaneSociety
             throw new NotImplementedException();
         }
 
-        internal static void RemoveAnimal(object animal)
+        internal static void RemoveAnimal(Animal animal)
         {
             throw new NotImplementedException();
         }
@@ -140,7 +140,7 @@ namespace HumaneSociety
             throw new NotImplementedException();
         }
 
-        internal static object GetShots(Animal animal)
+        internal static IQueryable<AnimalShot> GetShots(Animal animal)
         {
             throw new NotImplementedException();
         }
