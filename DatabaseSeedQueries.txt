@@ -13,76 +13,76 @@ VALUES ('Ferret');
 INSERT INTO Species (Name)
 VALUES ('Rabbit');
 
-INSERT INTO DietPlan (Name, FoodType, FoodAmountInCups)
+INSERT INTO DietPlans (Name, FoodType, FoodAmountInCups)
 VALUES ('VeryLittle', 'kibble' , 1);
 
-INSERT INTO DietPlan (Name, FoodType, FoodAmountInCups)
+INSERT INTO DietPlans (Name, FoodType, FoodAmountInCups)
 VALUES ('Little', 'kibble' , 2);
 
-INSERT INTO DietPlan (Name, FoodType, FoodAmountInCups)
+INSERT INTO DietPlans (Name, FoodType, FoodAmountInCups)
 VALUES ('Regular', 'kibble' , 3);
 
-INSERT INTO DietPlan (Name, FoodType, FoodAmountInCups)
+INSERT INTO DietPlans (Name, FoodType, FoodAmountInCups)
 VALUES ('Extra', 'kibble' , 4);
 
-INSERT INTO DietPlan (Name, FoodType, FoodAmountInCups)
+INSERT INTO DietPlans (Name, FoodType, FoodAmountInCups)
 VALUES ('Special', 'kibble' , 3);
 
-INSERT INTO Animal (Name, SpeciesId, Weight, Age, DietPlanID)
+INSERT INTO Animals (Name, SpeciesId, Weight, Age, DietPlanID)
 VALUES ('Bart', 1, 50, 1, 1);
 
-INSERT INTO Animal (Name, SpeciesId, Weight, Age, DietPlanID)
+INSERT INTO Animals (Name, SpeciesId, Weight, Age, DietPlanID)
 VALUES ('Pepe', 2, 15, 2, 2);
 
-INSERT INTO Animal (Name, SpeciesId, Weight, Age, DietPlanID)
+INSERT INTO Animals (Name, SpeciesId, Weight, Age, DietPlanID)
 VALUES ('Chad', 3, 1, 3, 3);
 
-INSERT INTO Animal (Name, SpeciesId, Weight, Age, DietPlanID)
+INSERT INTO Animals (Name, SpeciesId, Weight, Age, DietPlanID)
 VALUES ('Sherman', 4, 5, 4, 4);
 
-INSERT INTO Animal (Name, SpeciesId, Weight, Age, DietPlanID)
+INSERT INTO Animals (Name, SpeciesId, Weight, Age, DietPlanID)
 VALUES ('Pumpkin', 5, 7, 5, 5);
 
-INSERT INTO Room (RoomNumber, AnimalId)
+INSERT INTO Rooms (RoomNumber, AnimalId)
 VALUES (1, 1);
 
-INSERT INTO Room (RoomNumber, AnimalId)
+INSERT INTO Rooms (RoomNumber, AnimalId)
 VALUES (2, 2);
 
-INSERT INTO Room (RoomNumber, AnimalId)
+INSERT INTO Rooms (RoomNumber, AnimalId)
 VALUES (3, 3);
 
-INSERT INTO Room (RoomNumber, AnimalId)
+INSERT INTO Rooms (RoomNumber, AnimalId)
 VALUES (4, 4);
 
-INSERT INTO Room (RoomNumber, AnimalId)
+INSERT INTO Rooms (RoomNumber, AnimalId)
 VALUES (5, 5);
 
-INSERT INTO Room (RoomNumber, AnimalId)
+INSERT INTO Rooms (RoomNumber, AnimalId)
 VALUES (6, 1);
 
-INSERT INTO Room (RoomNumber, AnimalId)
+INSERT INTO Rooms (RoomNumber, AnimalId)
 VALUES (7, 2);
 
-INSERT INTO Room (RoomNumber, AnimalId)
+INSERT INTO Rooms (RoomNumber, AnimalId)
 VALUES (8, 3);
 
-INSERT INTO Room (RoomNumber, AnimalId)
+INSERT INTO Rooms (RoomNumber, AnimalId)
 VALUES (9, 4);
 
-INSERT INTO Room (RoomNumber, AnimalId)
+INSERT INTO Rooms (RoomNumber, AnimalId)
 VALUES (10, 5);
 
-INSERT INTO Shot (Name)
+INSERT INTO Shots (Name)
 VALUES ('Flu');
 
-INSERT INTO Shot (Name)
+INSERT INTO Shots (Name)
 VALUES ('Hepatitis');
 
-INSERT INTO Shot (Name)
+INSERT INTO Shots (Name)
 VALUES ('Tetanus');
 
-INSERT INTO Shot (Name)
+INSERT INTO Shots (Name)
 VALUES ('Rabies');
 
 INSERT INTO Shot (Name)
@@ -90,3 +90,4 @@ VALUES ('Cancer');
 
 INSERT INTO Employees(FirstName, LastName, UserName, Password, EmployeeNumber, Email)
 VALUES ('Josh', 'Stoltenberg', 'Stoltmeister', 'abc123', 2, 'abc123@gmail.com');
+
