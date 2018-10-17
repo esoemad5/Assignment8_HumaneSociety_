@@ -17,7 +17,12 @@ namespace HumaneSociety
 
         internal static Client GetClient(string userName, string password)
         {
-            throw new NotImplementedException();
+            Client outputClient = db.Clients.
+                Where(u => u.UserName == userName && u.Password == password)
+                /*Could put .AsEnumerable() here. Doesn't seem neccesary. Might not be the case elsewhere*/
+                .Single();
+            return outputClient;
+            
         }
 
         internal static IQueryable<Adoption> GetUserAdoptionStatus(Client client)
@@ -57,12 +62,11 @@ namespace HumaneSociety
             Address address = new Address();
             address.AddressLine1 = streetAddress;
             address.Zipcode = zipCode;
-            address.USStateId = db.USStates.ElementAt(state).USStateId;
+            address.USStateId = state;
             db.Addresses.InsertOnSubmit(address);
             try
             {
                 db.SubmitChanges();
-                Console.WriteLine("Address Added");
             }
             catch (Exception e)
             {
@@ -80,7 +84,8 @@ namespace HumaneSociety
             try
             {
                 db.SubmitChanges();
-                Console.WriteLine("Cleint added");
+                Console.WriteLine(client);
+                Console.WriteLine(db.Clients.Select(x => x.FirstName == client.FirstName));
             }
             catch (Exception e)
             {
@@ -156,6 +161,7 @@ namespace HumaneSociety
                     return s;
                 }
             }
+            return null;
         }
 
         internal static Species CreateSpecies()
