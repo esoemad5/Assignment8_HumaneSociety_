@@ -57,12 +57,11 @@ namespace HumaneSociety
             Address address = new Address();
             address.AddressLine1 = streetAddress;
             address.Zipcode = zipCode;
-            address.USStateId = db.USStates.ElementAt(state).USStateId;
+            address.USStateId = state;
             db.Addresses.InsertOnSubmit(address);
             try
             {
                 db.SubmitChanges();
-                Console.WriteLine("Address Added");
             }
             catch (Exception e)
             {
@@ -80,7 +79,8 @@ namespace HumaneSociety
             try
             {
                 db.SubmitChanges();
-                Console.WriteLine("Cleint added");
+                Console.WriteLine(client);
+                Console.WriteLine(db.Clients.Select(x => x.FirstName == client.FirstName));
             }
             catch(Exception e)
             {
@@ -145,23 +145,12 @@ namespace HumaneSociety
 
         internal static Employee EmployeeLogin(string userName, string password)
         {
-            var Employee = db.Employees.Where(x => x.UserName == userName && x.Password == password);     
-            if (Employee.Count() > 1)
-            {
-                throw new Exception();
-            }
-            return Employee.ElementAt(0);
+            throw new NotImplementedException();
         }
 
-        internal static Employee RetrieveEmployeeUser(string email, int? employeeNumber)
+        internal static Employee RetrieveEmployeeUser(string email, int employeeNumber)
         {
-            var Employee = db.Employees.Where(e => e.Email == email && e.EmployeeNumber == employeeNumber);
-            if (Employee.Count() > 1)
-            {
-                throw new Exception();
-            }
-            return Employee.ElementAt(0);
-            // Null Check
+            throw new NotImplementedException();
         }
 
         internal static void UpdateAdoption(bool v, Adoption adoption)
@@ -176,18 +165,12 @@ namespace HumaneSociety
 
         internal static void AddUsernameAndPassword(Employee employee)
         {
-            RetrieveEmployeeUser(employee.Email, employee.EmployeeNumber).UserName = employee.UserName;
-            RetrieveEmployeeUser(employee.Email, employee.EmployeeNumber).Password = employee.Password;
+            throw new NotImplementedException();
         }
 
         internal static bool CheckEmployeeUserNameExist(string username)
         {
-            var nameExists = db.Employees.Where(e => e.UserName == username);
-            if (nameExists.Count() > 0)
-            {
-                return true;
-            }
-            return false;
+            throw new NotImplementedException();
         }
 
         internal static IQueryable<AnimalShot> GetShots(Animal animal)
