@@ -477,7 +477,7 @@ namespace HumaneSociety
                 client.LastName = UserInterface.GetUserInput();
                 Query.UpdateLastName(client);
             }
-            else
+            else if(input == "both" || input == "3")
             {
                 UserInterface.DisplayUserOptions("Please enter your new first name.");
                 client.FirstName = UserInterface.GetUserInput();
@@ -485,6 +485,10 @@ namespace HumaneSociety
                 UserInterface.DisplayUserOptions("Please enter your new last name.");
                 client.LastName = UserInterface.GetUserInput();
                 Query.UpdateLastName(client);
+            }
+            else
+            {
+                UpdateName();
             }
         }
     }
