@@ -112,17 +112,23 @@ namespace HumaneSociety
 
         internal static Employee EmployeeLogin(string userName, string password)
         {
-            var test = db.Employees.Where(x => x.UserName == userName && x.Password == password);     
-            if (test.Count() > 1)
+            var Employee = db.Employees.Where(x => x.UserName == userName && x.Password == password);     
+            if (Employee.Count() > 1)
             {
                 throw new Exception();
             }
-            return test.ElementAt(0);
+            return Employee.ElementAt(0);
         }
 
         internal static Employee RetrieveEmployeeUser(string email, int employeeNumber)
         {
-            throw new NotImplementedException();
+            var Employee = db.Employees.Where(e => e.Email == email && e.EmployeeNumber == employeeNumber);
+            if (Employee.Count() > 1)
+            {
+                throw new Exception();
+            }
+            return Employee.ElementAt(0);
+            // Null Check
         }
 
         internal static void UpdateAdoption(bool v, Adoption adoption)
@@ -142,7 +148,12 @@ namespace HumaneSociety
 
         internal static bool CheckEmployeeUserNameExist(string username)
         {
-            throw new NotImplementedException();
+            var nameExists = db.Employees.Where(e => e.UserName == username);
+            if (nameExists.Count() > 0)
+            {
+                return true;
+            }
+            return false;
         }
 
         internal static IQueryable<AnimalShot> GetShots(Animal animal)
