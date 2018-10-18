@@ -365,6 +365,7 @@ namespace HumaneSociety
             }
             return shotExists;
         }
+        
 
         internal static void EnterUpdate(Animal animal, Dictionary<int, string> updates)
         {
@@ -386,7 +387,7 @@ namespace HumaneSociety
                         animal.Demeanor = entry.Value;
                         break;
                     case 5:
-                        if (entry.Value == "true")
+                        if (entry.Value.ToLower() == "true")
                         {
                             animal.KidFriendly = true;
                         }
@@ -396,7 +397,7 @@ namespace HumaneSociety
                         }
                         break;
                     case 6:
-                        if (entry.Value == "true")
+                        if (entry.Value.ToLower() == "true")
                         {
                             animal.PetFriendly = true;
                         }
@@ -411,9 +412,8 @@ namespace HumaneSociety
                     default:
                         break;
                 }
-            }
-            //submit changes method
-            db.SubmitChanges();
+            }            
+            TryToSubmitChanges();
         }
 
         private static void TryToSubmitChanges()
