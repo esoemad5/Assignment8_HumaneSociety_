@@ -11,19 +11,11 @@ namespace HumaneSociety
         private static HumaneSocietyDataContext db = new HumaneSocietyDataContext();
 
         // Admin queries
-        internal static void ReadEmployee(Employee employee)
+        internal static void ReadEmployee(int employeeId)
         {
-            employee = db.Employees.Where(e => e.EmployeeNumber == employee.EmployeeNumber).Single();
-            UserInterface.DisplayUserOptions("Name: " + employee.FirstName + " " + employee.LastName);
-            UserInterface.DisplayUserOptions("Username: " + employee.UserName);
-            UserInterface.DisplayUserOptions("Password: " + employee.Password);
-            UserInterface.DisplayUserOptions("Email: " + employee.Email);
-            UserInterface.DisplayUserOptions("Employee Number: " + employee.EmployeeNumber);
-            UserInterface.DisplayUserOptions("Assigned Animals: ");
-            foreach(Animal a in employee.Animals)
-            {
-                UserInterface.DisplayUserOptions(a.Name);
-            }
+            Employee employee = db.Employees.Where(e => e.EmployeeNumber == employeeId).Single();
+            UserInterface.DisplayEmployee(employee);
+            
         }
 
         internal static void DeleteEmployee(Employee employee)
@@ -48,8 +40,7 @@ namespace HumaneSociety
         internal static void UpdateEmployee(int employeeNumber)
         {
             Employee target = db.Employees.Where(e => e.EmployeeNumber == employeeNumber).Single();
-            Console.WriteLine("Current values:");
-            ReadEmployee(target);
+            UserInterface.DisplayEmployee(target);
             Console.WriteLine("Which field would you like to change?");
             Console.ReadLine();
         }
