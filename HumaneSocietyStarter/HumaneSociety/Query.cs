@@ -225,7 +225,18 @@ namespace HumaneSociety
 
         internal static DietPlan GetDietPlan()
         {
-            throw new NotImplementedException();
+            DisplayDietPlans();
+            string dietName = UserInterface.GetStringData("name", "desired diet plan");
+            return db.DietPlans.Where(d => d.Name == dietName).Single();
+        }
+
+        internal static void DisplayDietPlans()
+        {
+            UserInterface.DisplayUserOptions("Available Diet Plans: ");
+            foreach (DietPlan d in db.DietPlans.Where(p => true))
+            {
+                UserInterface.DisplayUserOptions("- " + d.Name);
+            }
         }
 
         internal static void AddAnimal(Animal animal)
