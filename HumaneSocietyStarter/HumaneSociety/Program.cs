@@ -9,14 +9,10 @@ namespace HumaneSociety
     class Program
     {
         static void Main(string[] args)
-        {
-            PointOfEntry.Run();
-            //HumaneSocietyDataContext db = new HumaneSocietyDataContext();
+        { 
+            // PointOfEntry.Run();
 
-            //Console.WriteLine(db.Animals.ElementAt(0).Name);
-            //Query.RemoveAnimal(db.Animals.ElementAt(0));
-            //Console.WriteLine(db.Animals.ElementAt(0).Name);
-            //Console.ReadLine();
+            Query.GetSpecies();
         }
     }
 }
