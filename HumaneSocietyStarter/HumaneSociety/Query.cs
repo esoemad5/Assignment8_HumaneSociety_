@@ -15,7 +15,6 @@ namespace HumaneSociety
         {
             Employee employee = db.Employees.Where(e => e.EmployeeNumber == employeeId).Single();
             UserInterface.DisplayEmployee(employee);
-            
         }
 
         internal static void DeleteEmployee(Employee employee)
@@ -41,8 +40,9 @@ namespace HumaneSociety
         {
             Employee target = db.Employees.Where(e => e.EmployeeNumber == employeeNumber).Single();
             UserInterface.DisplayEmployee(target);
-            Console.WriteLine("Which field would you like to change?");
-            Console.ReadLine();
+            UserInterface.DisplayUserOptions("Which field would you like to change?");
+            // How to move animal assignment?
+            UserInterface.UpdateEmployee_MenuSelection();
         }
 
         internal static bool EmployeeNumberIsAlreadyInUse(int? employeeNumber)

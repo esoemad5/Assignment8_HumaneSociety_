@@ -24,6 +24,7 @@ namespace HumaneSociety
             }
             RunUserMenus();
         }
+
         protected override void RunUserMenus()
         {
             List<string> options = new List<string>() { "What would you like to do? (select number of choice)", "1. Add animal", "2. Remove Anmial", "3. Check Animal Status",  "4. Approve Adoption" };
@@ -31,6 +32,7 @@ namespace HumaneSociety
             string input = UserInterface.GetUserInput();
             RunUserInput(input);
         }
+
         private void RunUserInput(string input)
         {
             switch (input)
@@ -243,6 +245,7 @@ namespace HumaneSociety
                 Query.RemoveAnimal(animal);
             }
         }
+
         private void AddAnimal()
         {
             Console.Clear();
@@ -289,6 +292,7 @@ namespace HumaneSociety
             }
             
         }
+
         private void CreateNewEmployee()
         {
             Console.Clear();
