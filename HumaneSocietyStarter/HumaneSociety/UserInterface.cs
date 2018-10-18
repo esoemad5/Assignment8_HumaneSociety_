@@ -61,6 +61,38 @@ namespace HumaneSociety
             return data;
         }
 
+        internal static void UpdateEmployee_MenuSelection(Employee target)
+        {
+            string input = GetStringData("selection", "your");
+            switch (input)
+            {
+                case "FirstName":
+                    Query.UpdateEmployee_FirstName(GetStringData(input + "'s", "new value"), target);
+                    break;
+                case "LastName":
+                    Query.UpdateEmployee_LastName(GetStringData(input + "'s", "new value"), target);
+                    break;
+                case "UserName":
+                    Query.UpdateEmployee_UserName(GetStringData(input + "'s", "new value"), target);
+                    break;
+                case "Password":
+                    Query.UpdateEmployee_Password(GetStringData(input + "'s", "new value"), target); ;
+                    break;
+                case "EmployeeNumber":
+                    Query.UpdateEmployee_EmployeeNumber(GetIntegerData(input + "'s", "new value"), target);
+                    break;
+                case "Email":
+                    Query.UpdateEmployee_Email(GetStringData(input + "'s", "new value"), target);
+                    break;
+                case "AssignedAnimals":
+                    break;
+                default:
+                    DisplayUserOptions("Invalid Selection.");
+                    UpdateEmployee_MenuSelection(target);
+                    return;
+            }
+        }
+
         internal static bool? GetBitData(List<string> options)
         {
             DisplayUserOptions(options);

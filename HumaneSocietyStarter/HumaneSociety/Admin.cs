@@ -84,12 +84,13 @@ namespace HumaneSociety
             {
                 Employee employee = new Employee();
                 employee.EmployeeNumber = int.Parse(UserInterface.GetStringData("employee number", "the employee's"));
-                Query.ReadEmployee(employee.EmployeeId);
+                Query.ReadEmployee(employee.EmployeeNumber);
             }
             catch
             {
                 Console.Clear();
                 UserInterface.DisplayUserOptions("Employee not found please try again or type exit;");
+                Console.ReadLine();
                 return;
             }
         }

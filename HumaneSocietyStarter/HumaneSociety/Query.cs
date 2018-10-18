@@ -419,7 +419,7 @@ namespace HumaneSociety
         {
             // EXTRA FIELD IN CSV???
             // defaulting to going into /bin/debug ?
-            Animal newAnimal = new Animal();
+            
             //string[] allLines = File.ReadAllLines(filename);
             //var query = from l in allLines
             //            let newFile = l.Split(',').Select(e => e.First);
@@ -429,6 +429,7 @@ namespace HumaneSociety
 
             foreach (string[] x in filteredResults)
             {
+                Animal newAnimal = new Animal();
                 newAnimal.Name = x[1];
                 newAnimal.Weight = Int32.Parse(x[3]);
                 newAnimal.Age = Int32.Parse(x[4]);
@@ -437,6 +438,7 @@ namespace HumaneSociety
                 newAnimal.PetFriendly = StringValueToBool(x[9]);
                 newAnimal.AdoptionStatus = x[11];
                 AddAnimal(newAnimal); // animal needs employee?
+                newAnimal = null; // reset values IS this needed?
             }
 
 
