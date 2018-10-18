@@ -181,13 +181,13 @@ namespace HumaneSociety
             
             try
             {
-                if (Int32.Parse(input) >= allSpecies.Count)
+                if (Int32.Parse(input)-1 >= allSpecies.Count)
                 {
                     return CreateSpecies();
                 }
                 else
                 {
-                    newSpecies = allSpecies[Int32.Parse(input)];
+                    newSpecies = allSpecies[Int32.Parse(input)-1];
                     return newSpecies;
                 }
             }
