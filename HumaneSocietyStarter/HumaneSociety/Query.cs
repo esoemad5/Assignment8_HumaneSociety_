@@ -362,6 +362,29 @@ namespace HumaneSociety
             TryToSubmitChanges();
         }
 
+        internal static void ChangeAnimalRoom(Animal animal)
+        {
+            db.Rooms.Where(r => r.Animal == animal).Single().AnimalId = null;
+            DisplayAvailableRooms();            
+            int newRoomNumber = UserInterface.GetIntegerData("room number", "the new");
+            db.Rooms.Where(r => r.RoomNumber == newRoomNumber).Single().AnimalId = animal.AnimalId;
+            TryToSubmitChanges();
+        }
+
+        internal static void DisplayAvailableRooms()
+        {
+            var rooms = db.Rooms.Where(r => true);
+            UserInterface.DisplayUserOptions("Rooms Available: ");
+            foreach (Room r in rooms)
+            {
+                if (r.AnimalId == 0 || r.AnimalId == null)
+                {
+                    UserInterface.DisplayUserOptions(r.RoomNumber + ", ");
+                }                
+            }
+            Console.WriteLine("\n");
+        }
+
         private static void TryToSubmitChanges()
         {
             try
