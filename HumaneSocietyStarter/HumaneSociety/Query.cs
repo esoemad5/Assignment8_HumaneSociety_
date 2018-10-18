@@ -254,7 +254,7 @@ namespace HumaneSociety
 
         internal static Room GetRoom(int animalId)
         {
-            throw new NotImplementedException();
+            return db.Rooms.Where(r => r.AnimalId == animalId).Single();
         }
 
         internal static void AddUsernameAndPassword(Employee employee)
