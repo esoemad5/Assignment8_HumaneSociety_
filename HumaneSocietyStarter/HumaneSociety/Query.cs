@@ -31,7 +31,7 @@ namespace HumaneSociety
 
         internal static Animal GetAnimalByID(int iD)
         {
-            throw new NotImplementedException();
+            return db.Animals.Where(x => x.AnimalId == iD).Single();
         }
 
         internal static void Adopt(Animal animal, Client client)
@@ -39,9 +39,9 @@ namespace HumaneSociety
             throw new NotImplementedException();
         }
 
-        internal static IQueryable<Animal> SearchForAnimalByMultipleTraits()
+        internal static IQueryable<Animal> SearchForAnimalByMultipleTraits() // Simply lists animals right now
         {
-            throw new NotImplementedException();
+            return db.Animals.Where(x => true);
         }
 
         internal static IQueryable<Client> RetrieveClients()
@@ -251,7 +251,7 @@ namespace HumaneSociety
 
         internal static Room GetRoom(int animalId)
         {
-            throw new NotImplementedException();
+            return db.Rooms.Where(r => r.AnimalId == animalId).Single();
         }
 
         internal static void AddUsernameAndPassword(Employee employee)
