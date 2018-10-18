@@ -9,10 +9,12 @@ namespace HumaneSociety
     class Program
     {
         static void Main(string[] args)
-        { 
+        {
             // PointOfEntry.Run();
 
-            Query.GetSpecies();
+            
+            Console.WriteLine(Query.CheckEmployeeUserNameExist("Stoltmasdfter"));
+            Console.ReadLine();
         }
     }
 }
