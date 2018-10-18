@@ -26,7 +26,7 @@ namespace HumaneSociety
 
         internal static IQueryable<Adoption> GetUserAdoptionStatus(Client client)
         {
-            throw new NotImplementedException();
+            return db.Adoptions.Where(a => a.ClientId == client.ClientId);
         }
 
         internal static Animal GetAnimalByID(int iD)
@@ -36,7 +36,28 @@ namespace HumaneSociety
 
         internal static void Adopt(Animal animal, Client client)
         {
-            throw new NotImplementedException();
+            Animal adoptee = db.Animals.Where(a => a.AnimalId == animal.AnimalId).Single();
+            adoptee.AdoptionStatus = "Pending";
+            Client adoptor = db.Clients.Where(c => c.ClientId == client.ClientId).Single();
+            Adoption adoption = new Adoption();
+            adoption.Client = adoptor;
+            adoption.Animal = adoptee;
+            adoption.ApprovalStatus = "Pending";
+
+            //These lines will need to be changed in the future
+            adoption.AdoptionFee = 75;
+            adoption.PaymentCollected = true;
+
+            db.Adoptions.InsertOnSubmit(adoption);
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
         }
 
         internal static IQueryable<Animal> SearchForAnimalByMultipleTraits() // Simply lists animals right now
