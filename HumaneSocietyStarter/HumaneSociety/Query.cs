@@ -28,7 +28,9 @@ namespace HumaneSociety
 
         internal static void CreateEmployee(Employee employee)
         {
-            throw new NotImplementedException();
+            db.Employees.InsertOnSubmit(employee);
+            TryToSubmitChanges();
+
         }
 
         internal static Client GetClient(string userName, string password)
@@ -373,6 +375,18 @@ namespace HumaneSociety
         internal static void EnterUpdate(Animal animal, Dictionary<int, string> updates)
         {
             throw new NotImplementedException();
+        }
+
+        private static void TryToSubmitChanges()
+        {
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }
