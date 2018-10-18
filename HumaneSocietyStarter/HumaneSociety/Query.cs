@@ -127,6 +127,7 @@ namespace HumaneSociety
                 Console.WriteLine(e.Message);
             }
         }
+
         /* Old Update methods. UpdateClient does it all. Holding on to them for now.
         internal static void updateClient(Client client) // Why not updateIncome/NumberOfKids/HomeSquareFootage????
         {
@@ -164,10 +165,7 @@ namespace HumaneSociety
             throw new NotImplementedException();
         }
 
-        internal static IQueryable<Adoption> GetPendingAdoptions()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         internal static void UpdateFirstName(Client client)
         {
@@ -195,6 +193,11 @@ namespace HumaneSociety
             }
         }
         */
+
+        internal static IQueryable<Adoption> GetPendingAdoptions()
+        {
+            throw new NotImplementedException();
+        }
 
         internal static void RemoveAnimal(Animal animal)
         {
