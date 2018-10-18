@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace HumaneSociety
 {
@@ -15,14 +16,14 @@ namespace HumaneSociety
         {
             Employee employee = db.Employees.Where(e => e.EmployeeNumber == employeeId).Single();
             UserInterface.DisplayEmployee(employee);
-            
+
         }
 
         internal static void DeleteEmployee(Employee employee)
         {
             Employee target = db.Employees.Where(e => e.EmployeeNumber == employee.EmployeeNumber && e.LastName == employee.LastName).Single();
             Console.WriteLine("About to delete {0} {1}, EmployeeNumber: {2}. Are you sure?(y/n)", target.FirstName, target.LastName, target.EmployeeNumber);
-            if(Console.ReadKey().KeyChar == 'y')
+            if (Console.ReadKey().KeyChar == 'y')
             {
                 db.Employees.DeleteOnSubmit(target);
                 TryToSubmitChanges();
@@ -55,7 +56,7 @@ namespace HumaneSociety
                 Console.ReadKey(true);
                 return true;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 Console.WriteLine("Valid number");
                 return false;
@@ -177,16 +178,16 @@ namespace HumaneSociety
             Species newSpecies;
             DisplaySpeciesOptions();
             string input = UserInterface.GetStringData("menu number", "species");
-            
+
             try
             {
-                if (Int32.Parse(input)-1 >= allSpecies.Count)
+                if (Int32.Parse(input) - 1 >= allSpecies.Count)
                 {
                     return CreateSpecies();
                 }
                 else
                 {
-                    newSpecies = allSpecies[Int32.Parse(input)-1];
+                    newSpecies = allSpecies[Int32.Parse(input) - 1];
                     return newSpecies;
                 }
             }
@@ -219,7 +220,7 @@ namespace HumaneSociety
             newSpecies.Name = UserInterface.GetStringData("the species", "the name of");
             db.Species.InsertOnSubmit(newSpecies);
             TryToSubmitChanges();
-            return newSpecies;            
+            return newSpecies;
         }
 
         internal static DietPlan GetDietPlan()
@@ -236,7 +237,7 @@ namespace HumaneSociety
             {
                 UserInterface.DisplayUserOptions("- " + d.Name);
             }
-        }        
+        }
 
         internal static void AddAnimal(Animal animal)
         {
@@ -322,7 +323,7 @@ namespace HumaneSociety
             }
             return shotExists;
         }
-        
+
 
         internal static void EnterUpdate(Animal animal, Dictionary<int, string> updates)
         {
@@ -369,14 +370,14 @@ namespace HumaneSociety
                     default:
                         break;
                 }
-            }            
+            }
             TryToSubmitChanges();
         }
 
         internal static void ChangeAnimalRoom(Animal animal)
         {
             db.Rooms.Where(r => r.Animal == animal).Single().AnimalId = null;
-            DisplayAvailableRooms();            
+            DisplayAvailableRooms();
             int newRoomNumber = UserInterface.GetIntegerData("room number", "the new");
             db.Rooms.Where(r => r.RoomNumber == newRoomNumber).Single().AnimalId = animal.AnimalId;
             TryToSubmitChanges();
@@ -409,9 +410,49 @@ namespace HumaneSociety
                 if (r.AnimalId == 0 || r.AnimalId == null)
                 {
                     UserInterface.DisplayUserOptions(r.RoomNumber + ", ");
-                }                
+                }
             }
             Console.WriteLine("\n");
+        }
+
+        internal static void GetAnimalsByCSV(string filename)
+        {
+            // EXTRA FIELD IN CSV???
+            // defaulting to going into /bin/debug ?
+            Animal newAnimal = new Animal();
+            //string[] allLines = File.ReadAllLines(filename);
+            //var query = from l in allLines
+            //            let newFile = l.Split(',').Select(e => e.First);
+            var filteredResults = File.ReadAllLines(filename)
+            .Select(l => l.Split(',').Select(s => s.Trim()).ToArray())
+            .Where(a => true);
+
+            foreach (string[] x in filteredResults)
+            {
+                newAnimal.Name = x[1];
+                newAnimal.Weight = Int32.Parse(x[3]);
+                newAnimal.Age = Int32.Parse(x[4]);
+                newAnimal.Demeanor = x[7];
+                newAnimal.KidFriendly = StringValueToBool(x[8]);
+                newAnimal.PetFriendly = StringValueToBool(x[9]);
+                newAnimal.AdoptionStatus = x[11];
+                AddAnimal(newAnimal); // animal needs employee?
+            }
+
+
+
+        }
+
+        private static bool StringValueToBool(string numberString)
+        {
+            if (numberString == "1")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private static void TryToSubmitChanges()
