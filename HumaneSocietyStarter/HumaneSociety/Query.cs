@@ -36,7 +36,7 @@ namespace HumaneSociety
 
         internal static void UpdateEmployee(Employee employee)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("In UpdateEmployee");
         }
 
         internal static bool EmployeeNumberIsAlreadyInUse(int? employeeNumber)
@@ -143,72 +143,6 @@ namespace HumaneSociety
             //updateClient = client;
             TryToSubmitChanges();
         }
-
-        /* Old Update methods. UpdateClient does it all. Holding on to them for now.
-        internal static void updateClient(Client client) // Why not updateIncome/NumberOfKids/HomeSquareFootage????
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static void UpdateUsername(Client client)
-        {
-            db.Clients.Where(c => c.ClientId == client.ClientId).Single().UserName = client.UserName;
-            try
-            {
-                db.SubmitChanges();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-        internal static void UpdateEmail(Client client)
-        {
-            db.Clients.Where(c => c.ClientId == client.ClientId).Single().Email = client.Email;
-            try
-            {
-                db.SubmitChanges();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-        internal static void UpdateAddress(Client client)
-        {
-            throw new NotImplementedException();
-        }
-
-        
-
-        internal static void UpdateFirstName(Client client)
-        {
-            db.Clients.Where(c => c.ClientId == client.ClientId).Single().FirstName = client.FirstName;
-            try
-            {
-                db.SubmitChanges();
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-        internal static void UpdateLastName(Client client)
-        {
-            db.Clients.Where(c => c.ClientId == client.ClientId).Single().LastName = client.LastName;
-            try
-            {
-                db.SubmitChanges();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-        */
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
         {
