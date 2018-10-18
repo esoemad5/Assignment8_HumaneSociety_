@@ -14,13 +14,15 @@ namespace HumaneSociety
         internal static void ReadEmployee(Employee employee)
         {
             employee = db.Employees.Where(e => e.EmployeeNumber == employee.EmployeeNumber).Single();
-            UserInterface.DisplayUserOptions("Name: " + employee.FirstName + " " + employee.LastName + "\n");
-            UserInterface.DisplayUserOptions("Email: " + employee.Email + "\n");
+            UserInterface.DisplayUserOptions("Name: " + employee.FirstName + " " + employee.LastName);
+            UserInterface.DisplayUserOptions("Username: " + employee.UserName);
+            UserInterface.DisplayUserOptions("Password: " + employee.Password);
+            UserInterface.DisplayUserOptions("Email: " + employee.Email);
             UserInterface.DisplayUserOptions("Employee Number: " + employee.EmployeeNumber);
             UserInterface.DisplayUserOptions("Assigned Animals: ");
             foreach(Animal a in employee.Animals)
             {
-                UserInterface.DisplayUserOptions(a.Name + "\n");
+                UserInterface.DisplayUserOptions(a.Name);
             }
         }
 
@@ -46,6 +48,10 @@ namespace HumaneSociety
         internal static void UpdateEmployee(int employeeNumber)
         {
             Employee target = db.Employees.Where(e => e.EmployeeNumber == employeeNumber).Single();
+            Console.WriteLine("Current values:");
+            ReadEmployee(target);
+            Console.WriteLine("Which field would you like to change?");
+            Console.ReadLine();
         }
 
         internal static bool EmployeeNumberIsAlreadyInUse(int? employeeNumber)
@@ -170,6 +176,8 @@ namespace HumaneSociety
 
         internal static Species GetSpecies()
         {
+            //Employee target = db.Employees.Where(e => e.EmployeeNumber == employeeNumber).Single();
+            //Above is a better solution (it uses more LINQ which is what the instructors want
             List<Species> allSpecies = new List<Species>();
             foreach (Species s in db.Species)
             {
@@ -181,13 +189,13 @@ namespace HumaneSociety
             
             try
             {
-                if (Int32.Parse(input) >= allSpecies.Count)
+                if (Int32.Parse(input)-1 >= allSpecies.Count)
                 {
                     return CreateSpecies();
                 }
                 else
                 {
-                    newSpecies = allSpecies[Int32.Parse(input)];
+                    newSpecies = allSpecies[Int32.Parse(input)-1];
                     return newSpecies;
                 }
             }
