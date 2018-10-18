@@ -10,8 +10,8 @@ namespace HumaneSociety
     {
         static void Main(string[] args)
         {
-            // PointOfEntry.Run();   
-            
+            // PointOfEntry.Run();               
+            Query.UpdateShot("Flu", Query.GetAnimalByID(2));
             Console.WriteLine();
             Console.ReadLine();
         }
