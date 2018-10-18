@@ -397,6 +397,18 @@ namespace HumaneSociety
             TryToSubmitChanges();
         }
 
+        internal static bool RoomsAvailable()
+        {
+            bool roomsAvailable = false;
+            var availableRooms = db.Rooms.Where(r => r.AnimalId == null);
+            if (availableRooms.Count() > 0)
+            {
+                roomsAvailable = true;
+            }
+
+            return roomsAvailable;
+        }
+
         internal static void DisplayAvailableRooms()
         {
             var rooms = db.Rooms.Where(r => true);
