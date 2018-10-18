@@ -9,7 +9,7 @@ namespace HumaneSociety
     public static class Query
     {
         private static HumaneSocietyDataContext db = new HumaneSocietyDataContext();
-
+        
         internal static void RunEmployeeQueries(Employee employee, string v)
         {
             throw new NotImplementedException();
@@ -317,7 +317,33 @@ namespace HumaneSociety
 
         internal static void UpdateShot(string v, Animal animal)
         {
-            throw new NotImplementedException();
+            AnimalShot newShot = new AnimalShot();
+            //newShot.AnimalId = animal.AnimalId;
+            newShot.Animal = animal;            
+            
+            newShot.DateReceived = DateTime.Now;
+            db.AnimalShots.InsertOnSubmit(newShot);
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        internal static bool CheckShot(string shotName)
+        {
+            bool shotExists = false;
+            foreach (Shot s in db.Shots)
+            {
+                if (s.Name == shotName)
+                {
+                    shotExists = true;
+                }
+            }
+            return shotExists;
         }
 
         internal static void EnterUpdate(Animal animal, Dictionary<int, string> updates)
