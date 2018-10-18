@@ -39,9 +39,9 @@ namespace HumaneSociety
             throw new NotImplementedException();
         }
 
-        internal static IQueryable<Animal> SearchForAnimalByMultipleTraits()
+        internal static IQueryable<Animal> SearchForAnimalByMultipleTraits() // Simply lists animals right now
         {
-            throw new NotImplementedException();
+            return db.Animals.Where(x => true);
         }
 
         internal static IQueryable<Client> RetrieveClients()
