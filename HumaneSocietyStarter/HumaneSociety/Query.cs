@@ -42,6 +42,7 @@ namespace HumaneSociety
             Console.ReadKey(true);
         }
 
+        //TODO
         internal static void UpdateEmployee(int employeeNumber)
         {
             Employee target = db.Employees.Where(e => e.EmployeeNumber == employeeNumber).Single();
@@ -70,6 +71,8 @@ namespace HumaneSociety
             TryToSubmitChanges();
         }
 
+
+
         internal static Client GetClient(string userName, string password)
         {
             Client outputClient = db.Clients.
@@ -89,6 +92,7 @@ namespace HumaneSociety
             return db.Animals.Where(x => x.AnimalId == iD).Single();
         }
 
+        //TODO
         internal static void Adopt(Animal animal, Client client)
         {
             animal.AdoptionStatus = "Pending";
@@ -120,7 +124,7 @@ namespace HumaneSociety
             return db.USStates;
         }
 
-        //TODO in here
+        //TODO
         internal static void AddNewClient(string firstName, string lastName, string username, string password, string email, string streetAddress, int zipCode, int state)
         {
             Console.WriteLine("In AddNewClient");
@@ -256,7 +260,7 @@ namespace HumaneSociety
         {
             RetrieveEmployeeUser(employee.Email, employee.EmployeeNumber).UserName = employee.UserName;
             RetrieveEmployeeUser(employee.Email, employee.EmployeeNumber).Password = employee.Password;
-            // Null Check
+            TryToSubmitChanges();
         }
 
         internal static bool CheckEmployeeUserNameExist(string username)
