@@ -47,6 +47,23 @@ namespace HumaneSociety
             throw new NotImplementedException();
         }
 
+        internal static bool EmployeeNumberIsAlreadyInUse(int? employeeNumber)
+        {
+            try
+            {
+                Employee test = db.Employees.Where(e => e.EmployeeNumber == employeeNumber).Single();
+                Console.WriteLine("Employee Number {0} is already in use", employeeNumber);
+                Console.WriteLine("Press any key to return to previous menu.");
+                Console.ReadKey(true);
+                return true;
+            }
+            catch(Exception)
+            {
+                Console.WriteLine("Valid number");
+                return false;
+            }
+        }
+
         internal static void CreateEmployee(Employee employee)
         {
             db.Employees.InsertOnSubmit(employee);
