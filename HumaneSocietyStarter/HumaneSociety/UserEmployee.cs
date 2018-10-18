@@ -247,6 +247,12 @@ namespace HumaneSociety
         {
             Console.Clear();
             Animal animal = new Animal();
+            if (!Query.RoomsAvailable())
+            {
+                Console.Clear();
+                UserInterface.DisplayUserOptions("No rooms available for a new animal. \n");
+                return;
+            }
             animal.Species = Query.GetSpecies();
             animal.Name = UserInterface.GetStringData("name", "the animal's");
             animal.Age = UserInterface.GetIntegerData("age", "the animal's");
