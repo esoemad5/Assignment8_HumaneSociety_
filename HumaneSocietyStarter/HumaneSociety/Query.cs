@@ -36,12 +36,10 @@ namespace HumaneSociety
 
         internal static void Adopt(Animal animal, Client client)
         {
-            Animal adoptee = db.Animals.Where(a => a.AnimalId == animal.AnimalId).Single();
-            adoptee.AdoptionStatus = "Pending";
-            Client adoptor = db.Clients.Where(c => c.ClientId == client.ClientId).Single();
+            animal.AdoptionStatus = "Pending";
             Adoption adoption = new Adoption();
-            adoption.Client = adoptor;
-            adoption.Animal = adoptee;
+            adoption.Client = client;
+            adoption.Animal = animal;
             adoption.ApprovalStatus = "Pending";
             //These lines will need to be changed in the future if Adoption Fees will vary or a method for collecting payment actualizes
             adoption.AdoptionFee = 75;
@@ -116,8 +114,8 @@ namespace HumaneSociety
 
         internal static void UpdateClient(Client client)
         {
-            Client updateClient = db.Clients.Where(c => c.ClientId == client.ClientId).Single();
-            updateClient = client;
+            //Client updateClient = db.Clients.Where(c => c.ClientId == client.ClientId).Single();
+            //updateClient = client;
             try
             {
                 db.SubmitChanges();
