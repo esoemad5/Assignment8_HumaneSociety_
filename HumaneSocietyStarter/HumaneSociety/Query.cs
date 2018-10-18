@@ -9,8 +9,24 @@ namespace HumaneSociety
     public static class Query
     {
         private static HumaneSocietyDataContext db = new HumaneSocietyDataContext();
-        
-        internal static void RunEmployeeQueries(Employee employee, string v)
+
+        // Admin queries
+        internal static void ReadEmployee(Employee employee)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static void DeleteEmployee(Employee employee)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static void UpdateEmployee(Employee employee)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static void CreateEmployee(Employee employee)
         {
             throw new NotImplementedException();
         }
@@ -110,7 +126,6 @@ namespace HumaneSociety
                 Console.WriteLine(e.Message);
             }
         }
-
 
         internal static void UpdateClient(Client client)
         {
