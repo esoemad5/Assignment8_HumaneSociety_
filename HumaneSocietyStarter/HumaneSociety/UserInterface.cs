@@ -61,34 +61,36 @@ namespace HumaneSociety
             return data;
         }
 
-        internal static object UpdateEmployee_MenuSelection()
+        internal static void UpdateEmployee_MenuSelection(Employee target)
         {
             string input = GetStringData("selection", "your");
             switch (input)
             {
                 case "FirstName":
-                    Action<string> method = Query.UpdateEmployee_FirstName;
-                    return new { action = method, parameter = GetStringData(input + "'s", "new value") };
+                    Query.UpdateEmployee_FirstName(GetStringData(input + "'s", "new value"), target);
+                    break;
                 case "LastName":
-                    GetStringData(input, "new value");
+                    Query.UpdateEmployee_LastName(GetStringData(input + "'s", "new value"), target);
                     break;
                 case "UserName":
-                    GetStringData(input, "new value");
+                    Query.UpdateEmployee_UserName(GetStringData(input + "'s", "new value"), target);
                     break;
                 case "Password":
-                    GetStringData(input, "new value");
+                    Query.UpdateEmployee_Password(GetStringData(input + "'s", "new value"), target); ;
                     break;
                 case "EmployeeNumber":
-                    GetIntegerData(input, "new value");
+                    Query.UpdateEmployee_EmployeeNumber(GetIntegerData(input + "'s", "new value"), target);
                     break;
                 case "Email":
-                    GetStringData(input, "new value");
+                    Query.UpdateEmployee_Email(GetStringData(input + "'s", "new value"), target);
+                    break;
+                case "AssignedAnimals":
                     break;
                 default:
                     DisplayUserOptions("Invalid Selection.");
-                    return UpdateEmployee_MenuSelection();
+                    UpdateEmployee_MenuSelection(target);
+                    return;
             }
-            return null;
         }
 
         internal static bool? GetBitData(List<string> options)

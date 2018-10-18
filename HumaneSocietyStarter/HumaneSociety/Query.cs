@@ -42,33 +42,40 @@ namespace HumaneSociety
             UserInterface.DisplayEmployee(target);
             UserInterface.DisplayUserOptions("Which field would you like to change?");
             // How to move animal assignment?
-            UserInterface.UpdateEmployee_MenuSelection();
+            UserInterface.UpdateEmployee_MenuSelection(target);
         }
 
-        public static void UpdateEmployee_FirstName(string newFirstName)
+        public static void UpdateEmployee_FirstName(string newFirstName, Employee employee)
         {
-
+            employee.FirstName = newFirstName;
+            TryToSubmitChanges();
         }
-        public static void UpdateEmployee_LastName()
+        public static void UpdateEmployee_LastName(string newLastName, Employee employee)
         {
-
+            employee.LastName = newLastName;
+            TryToSubmitChanges();
         }
-        public static void UpdateEmployee_UserName()
+        public static void UpdateEmployee_UserName(string newUserName, Employee employee)
         {
-
+            employee.UserName = newUserName;
+            TryToSubmitChanges();
         }
-        public static void UpdateEmployee_Password()
+        public static void UpdateEmployee_Password(string newPassword, Employee employee)
         {
-
+            employee.Password = newPassword;
+            TryToSubmitChanges();
         }
-        public static void UpdateEmployee_EmployeeNumber()
+        public static void UpdateEmployee_EmployeeNumber(int newEmployeeNumber, Employee employee)
         {
-
+            employee.EmployeeNumber = newEmployeeNumber;
+            TryToSubmitChanges();
         }
-        public static void UpdateEmployee_Email()
+        public static void UpdateEmployee_Email(string newEmail, Employee employee)
         {
-
+            employee.Email = newEmail;
+            TryToSubmitChanges();
         }
+        //TODO
         public static void UpdateEmployee_AssignedAnimals()
         {
 
