@@ -45,6 +45,35 @@ namespace HumaneSociety
             UserInterface.UpdateEmployee_MenuSelection();
         }
 
+        public static void UpdateEmployee_FirstName(string newFirstName)
+        {
+
+        }
+        public static void UpdateEmployee_LastName()
+        {
+
+        }
+        public static void UpdateEmployee_UserName()
+        {
+
+        }
+        public static void UpdateEmployee_Password()
+        {
+
+        }
+        public static void UpdateEmployee_EmployeeNumber()
+        {
+
+        }
+        public static void UpdateEmployee_Email()
+        {
+
+        }
+        public static void UpdateEmployee_AssignedAnimals()
+        {
+
+        }
+
         internal static bool EmployeeNumberIsAlreadyInUse(int? employeeNumber)
         {
             try

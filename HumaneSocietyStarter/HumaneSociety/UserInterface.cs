@@ -61,14 +61,14 @@ namespace HumaneSociety
             return data;
         }
 
-        internal static void UpdateEmployee_MenuSelection()
+        internal static object UpdateEmployee_MenuSelection()
         {
             string input = GetStringData("selection", "your");
             switch (input)
             {
                 case "FirstName":
-                    GetStringData(input, "new value");
-                    break;
+                    Action<string> method = Query.UpdateEmployee_FirstName;
+                    return new { action = method, parameter = GetStringData(input + "'s", "new value") };
                 case "LastName":
                     GetStringData(input, "new value");
                     break;
@@ -86,9 +86,9 @@ namespace HumaneSociety
                     break;
                 default:
                     DisplayUserOptions("Invalid Selection.");
-                    UpdateEmployee_MenuSelection();
-                    return;
+                    return UpdateEmployee_MenuSelection();
             }
+            return null;
         }
 
         internal static bool? GetBitData(List<string> options)
