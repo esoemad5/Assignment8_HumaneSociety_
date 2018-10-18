@@ -9,10 +9,28 @@ namespace HumaneSociety
     public static class Query
     {
         private static HumaneSocietyDataContext db = new HumaneSocietyDataContext();
-        
-        internal static void RunEmployeeQueries(Employee employee, string v)
+
+        // Admin queries
+        internal static void ReadEmployee(Employee employee)
         {
             throw new NotImplementedException();
+        }
+
+        internal static void DeleteEmployee(Employee employee)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static void UpdateEmployee(Employee employee)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static void CreateEmployee(Employee employee)
+        {
+            db.Employees.InsertOnSubmit(employee);
+            TryToSubmitChanges();
+
         }
 
         internal static Client GetClient(string userName, string password)
@@ -36,26 +54,17 @@ namespace HumaneSociety
 
         internal static void Adopt(Animal animal, Client client)
         {
-            Animal adoptee = db.Animals.Where(a => a.AnimalId == animal.AnimalId).Single();
-            adoptee.AdoptionStatus = "Pending";
-            Client adoptor = db.Clients.Where(c => c.ClientId == client.ClientId).Single();
+            animal.AdoptionStatus = "Pending";
             Adoption adoption = new Adoption();
-            adoption.Client = adoptor;
-            adoption.Animal = adoptee;
+            adoption.Client = client;
+            adoption.Animal = animal;
             adoption.ApprovalStatus = "Pending";
             //These lines will need to be changed in the future if Adoption Fees will vary or a method for collecting payment actualizes
             adoption.AdoptionFee = 75;
             adoption.PaymentCollected = true;
 
             db.Adoptions.InsertOnSubmit(adoption);
-            try
-            {
-                db.SubmitChanges();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            TryToSubmitChanges();
 
         }
 
@@ -84,14 +93,8 @@ namespace HumaneSociety
             address.Zipcode = zipCode;
             address.USStateId = state;
             db.Addresses.InsertOnSubmit(address);
-            try
-            {
-                db.SubmitChanges();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+
+            TryToSubmitChanges();
 
             Client client = new Client();
             client.FirstName = firstName;
@@ -101,32 +104,17 @@ namespace HumaneSociety
             client.Email = email;
             client.AddressId = address.AddressId;
             db.Clients.InsertOnSubmit(client);
-            try
-            {
-                db.SubmitChanges();
-                Console.WriteLine(client);
-                Console.WriteLine(db.Clients.Select(x => x.FirstName == client.FirstName));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
 
+            TryToSubmitChanges();
+        }
 
         internal static void UpdateClient(Client client)
         {
-            Client updateClient = db.Clients.Where(c => c.ClientId == client.ClientId).Single();
-            updateClient = client;
-            try
-            {
-                db.SubmitChanges();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            //Client updateClient = db.Clients.Where(c => c.ClientId == client.ClientId).Single();
+            //updateClient = client;
+            TryToSubmitChanges();
         }
+
         /* Old Update methods. UpdateClient does it all. Holding on to them for now.
         internal static void updateClient(Client client) // Why not updateIncome/NumberOfKids/HomeSquareFootage????
         {
@@ -164,10 +152,7 @@ namespace HumaneSociety
             throw new NotImplementedException();
         }
 
-        internal static IQueryable<Adoption> GetPendingAdoptions()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         internal static void UpdateFirstName(Client client)
         {
@@ -196,10 +181,15 @@ namespace HumaneSociety
         }
         */
 
+        internal static IQueryable<Adoption> GetPendingAdoptions()
+        {
+            throw new NotImplementedException();
+        }
+
         internal static void RemoveAnimal(Animal animal)
         {
             db.Animals.DeleteOnSubmit(animal);
-            db.SubmitChanges();
+            TryToSubmitChanges();
             // null checking
         }
 
@@ -254,7 +244,7 @@ namespace HumaneSociety
             Species newSpecies = new Species();
             newSpecies.Name = UserInterface.GetStringData("the species", "the name of");
             db.Species.InsertOnSubmit(newSpecies);
-            db.SubmitChanges();
+            TryToSubmitChanges();
             return newSpecies;            
         }
 
@@ -326,14 +316,7 @@ namespace HumaneSociety
                 newShot.DateReceived = DateTime.Now;
                 newShot.Shot = db.Shots.Where(s => s.Name == v).Single();
                 db.AnimalShots.InsertOnSubmit(newShot);
-                try
-                {
-                    db.SubmitChanges();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
+                TryToSubmitChanges();
             }
             else
             {
@@ -402,6 +385,18 @@ namespace HumaneSociety
             }
             //submit changes method
             db.SubmitChanges();
+        }
+
+        private static void TryToSubmitChanges()
+        {
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }
