@@ -8,6 +8,22 @@ namespace HumaneSociety
 {
     public static class Query
     {
+        public static void FixDatabase()
+        {
+            for(int i = 6; i <= 10; i++)
+            {
+                db.Rooms.Where(r => r.RoomId == i).Single().AnimalId = null;
+                try
+                {
+                    db.SubmitChanges();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            
+        }
         private static HumaneSocietyDataContext db = new HumaneSocietyDataContext();
 
         internal static void RunEmployeeQueries(Employee employee, string v)
@@ -36,7 +52,28 @@ namespace HumaneSociety
 
         internal static void Adopt(Animal animal, Client client)
         {
-            throw new NotImplementedException();
+            Animal adoptee = db.Animals.Where(a => a.AnimalId == animal.AnimalId).Single();
+            adoptee.AdoptionStatus = "Pending";
+            Client adoptor = db.Clients.Where(c => c.ClientId == client.ClientId).Single();
+            Adoption adoption = new Adoption();
+            adoption.Client = adoptor;
+            adoption.Animal = adoptee;
+            adoption.ApprovalStatus = "Pending";
+
+            //These lines will need to be changed in the future
+            adoption.AdoptionFee = 75;
+            adoption.PaymentCollected = true;
+
+            db.Adoptions.InsertOnSubmit(adoption);
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+
         }
 
         internal static IQueryable<Animal> SearchForAnimalByMultipleTraits() // Simply lists animals right now
