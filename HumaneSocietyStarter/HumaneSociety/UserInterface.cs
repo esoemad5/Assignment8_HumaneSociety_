@@ -20,6 +20,21 @@ namespace HumaneSociety
             Console.WriteLine(options);
         }
 
+        public static void DisplayEmployee(Employee employee)
+        {
+            DisplayUserOptions("Current values:");
+            DisplayUserOptions("Name: " + employee.FirstName + " " + employee.LastName);
+            DisplayUserOptions("Username: " + employee.UserName);
+            DisplayUserOptions("Password: " + employee.Password);
+            DisplayUserOptions("Email: " + employee.Email);
+            DisplayUserOptions("Employee Number: " + employee.EmployeeNumber);
+            DisplayUserOptions("Assigned Animals: ");
+            foreach (Animal a in employee.Animals)
+            {
+                DisplayUserOptions(a.Name);
+            }
+        }
+
         public static string GetUserInput()
         {
             string input = Console.ReadLine();
