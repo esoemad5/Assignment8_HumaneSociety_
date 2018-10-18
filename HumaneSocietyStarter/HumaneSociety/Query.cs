@@ -356,7 +356,52 @@ namespace HumaneSociety
 
         internal static void EnterUpdate(Animal animal, Dictionary<int, string> updates)
         {
-            throw new NotImplementedException();
+            foreach (KeyValuePair<int, string> entry in updates)
+            {
+                // "1. Species", "2. Name", "3. Age", "4. Demeanor", "5. Kid friendly", "6. Pet friendly", "7. Weight", "8. Finished" };                
+                switch (entry.Key)
+                {
+                    case 1:
+                        animal.Species = db.Species.Where(s => s.Name == entry.Value).Single();
+                        break;
+                    case 2:
+                        animal.Name = entry.Value;
+                        break;
+                    case 3:
+                        animal.Age = Int32.Parse(entry.Value);
+                        break;
+                    case 4:
+                        animal.Demeanor = entry.Value;
+                        break;
+                    case 5:
+                        if (entry.Value == "true")
+                        {
+                            animal.KidFriendly = true;
+                        }
+                        else
+                        {
+                            animal.KidFriendly = false;
+                        }
+                        break;
+                    case 6:
+                        if (entry.Value == "true")
+                        {
+                            animal.PetFriendly = true;
+                        }
+                        else
+                        {
+                            animal.PetFriendly = false;
+                        }
+                        break;
+                    case 7:
+                        animal.Weight = Int32.Parse(entry.Value);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            //submit changes method
+            db.SubmitChanges();
         }
     }
 }

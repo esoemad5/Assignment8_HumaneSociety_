@@ -10,10 +10,12 @@ namespace HumaneSociety
     {
         static void Main(string[] args)
         {
-            // PointOfEntry.Run();               
-            Query.UpdateShot("Fdlu", Query.GetAnimalByID(2));
-            Console.WriteLine();
-            Console.ReadLine();
+            // PointOfEntry.Run();            
+            //Dictionary<int, string> updates = new Dictionary<int, string>();
+            //updates.Add(1, "Lion");
+            //Query.EnterUpdate(, updates);
+            //Console.WriteLine();
+            //Console.ReadLine();
         }
     }
 }
