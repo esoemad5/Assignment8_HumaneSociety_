@@ -42,9 +42,9 @@ namespace HumaneSociety
             Console.ReadKey(true);
         }
 
-        internal static void UpdateEmployee(Employee employee)
+        internal static void UpdateEmployee(int employeeNumber)
         {
-            Console.WriteLine("In UpdateEmployee");
+            Employee target = db.Employees.Where(e => e.EmployeeNumber == employeeNumber).Single();
         }
 
         internal static bool EmployeeNumberIsAlreadyInUse(int? employeeNumber)

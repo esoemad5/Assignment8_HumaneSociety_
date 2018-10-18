@@ -51,28 +51,25 @@ namespace HumaneSociety
                 ReadEmployee();
                 RunUserMenus();
             }
+            /*
             else if (input == "4" || input.ToLower() == "update")
             {
                 UpdateEmployee();
                 RunUserMenus();
             }
+            */
             else
             {
                 UserInterface.DisplayUserOptions("Input not recognized please try again or type exit");
                 RunUserMenus();
             }
         }
-
+        /*
         private void UpdateEmployee()
         {
-            Employee employee = new Employee();
-            employee.FirstName = UserInterface.GetStringData("first name", "the employee's");
-            employee.LastName = UserInterface.GetStringData("last name", "the employee's");
-            employee.EmployeeId = int.Parse(UserInterface.GetStringData("employee number", "the employee's"));
-            employee.Email = UserInterface.GetStringData("email", "the employee's");
             try
             {
-                Query.UpdateEmployee(employee);
+                Query.UpdateEmployee(int.Parse(UserInterface.GetStringData("employee number", "the employee's")));
                 UserInterface.DisplayUserOptions("Employee update successful.");
             }
             catch
@@ -81,7 +78,7 @@ namespace HumaneSociety
                 UserInterface.DisplayUserOptions("Employee update unsuccessful please try again or type exit;");
                 return;
             }
-        }
+        }*/
 
         private void ReadEmployee()
         {
