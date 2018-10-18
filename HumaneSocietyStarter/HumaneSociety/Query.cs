@@ -205,11 +205,6 @@ namespace HumaneSociety
 
         internal static Species GetSpecies()
         {
-            foreach (Species s in db.Species.Where(s => true))
-            {
-                Console.WriteLine(s.Name);
-            }
-            Console.ReadLine();
             List<Species> allSpecies = new List<Species>();
             foreach (Species s in db.Species)
             {
@@ -219,7 +214,6 @@ namespace HumaneSociety
             DisplaySpeciesOptions();
             string input = UserInterface.GetStringData("menu number", "species");
             
-            // try - catch
             try
             {
                 if (Int32.Parse(input) >= allSpecies.Count)
@@ -229,9 +223,10 @@ namespace HumaneSociety
                 else
                 {
                     newSpecies = allSpecies[Int32.Parse(input)];
+                    return newSpecies;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Console.Clear();
                 Console.WriteLine("Incorrect input please try again! \n");
@@ -251,13 +246,15 @@ namespace HumaneSociety
                 Console.WriteLine(counter + "- " + s.Name + "\n");
                 counter++;
             }
-            Console.WriteLine((counter + 1) + "- Species Not Listed");
+            Console.WriteLine((counter) + "- Species Not Listed \n");
         }
 
         internal static Species CreateSpecies()
         {
             Species newSpecies = new Species();
-            newSpecies.Name = UserInterface.GetStringData("name of", "species");
+            newSpecies.Name = UserInterface.GetStringData("the species", "the name of");
+            db.Species.InsertOnSubmit(newSpecies);
+            db.SubmitChanges();
             return newSpecies;            
         }
 
@@ -314,7 +311,8 @@ namespace HumaneSociety
 
         internal static IQueryable<AnimalShot> GetShots(Animal animal)
         {
-            throw new NotImplementedException();
+            var shots = db.AnimalShots.Where(a => a.AnimalId == animal.AnimalId);
+            return shots;
         }
 
         internal static void UpdateShot(string v, Animal animal)
