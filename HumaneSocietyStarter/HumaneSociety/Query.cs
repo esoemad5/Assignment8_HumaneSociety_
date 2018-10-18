@@ -18,7 +18,20 @@ namespace HumaneSociety
 
         internal static void DeleteEmployee(Employee employee)
         {
-            throw new NotImplementedException();
+            Employee target = db.Employees.Where(e => e.EmployeeNumber == employee.EmployeeNumber && e.LastName == employee.LastName).Single();
+            Console.WriteLine("About to delete {0} {1}, EmployeeNumber: {2}. Are you sure?(y/n)", target.FirstName, target.LastName, target.EmployeeNumber);
+            if(Console.ReadKey().KeyChar == 'y')
+            {
+                db.Employees.DeleteOnSubmit(target);
+                TryToSubmitChanges();
+                Console.WriteLine("Employee deleted.");
+            }
+            else
+            {
+                Console.WriteLine("Delete aborted.");
+            }
+            Console.WriteLine("Press any key to return to the previous menu.");
+            Console.ReadKey(true);
         }
 
         internal static void UpdateEmployee(Employee employee)
@@ -30,7 +43,6 @@ namespace HumaneSociety
         {
             db.Employees.InsertOnSubmit(employee);
             TryToSubmitChanges();
-
         }
 
         internal static Client GetClient(string userName, string password)
