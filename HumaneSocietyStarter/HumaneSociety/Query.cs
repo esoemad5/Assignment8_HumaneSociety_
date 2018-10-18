@@ -64,14 +64,7 @@ namespace HumaneSociety
             adoption.PaymentCollected = true;
 
             db.Adoptions.InsertOnSubmit(adoption);
-            try
-            {
-                db.SubmitChanges();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            TryToSubmitChanges();
 
         }
 
@@ -100,14 +93,8 @@ namespace HumaneSociety
             address.Zipcode = zipCode;
             address.USStateId = state;
             db.Addresses.InsertOnSubmit(address);
-            try
-            {
-                db.SubmitChanges();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+
+            TryToSubmitChanges();
 
             Client client = new Client();
             client.FirstName = firstName;
@@ -117,30 +104,15 @@ namespace HumaneSociety
             client.Email = email;
             client.AddressId = address.AddressId;
             db.Clients.InsertOnSubmit(client);
-            try
-            {
-                db.SubmitChanges();
-                Console.WriteLine(client);
-                Console.WriteLine(db.Clients.Select(x => x.FirstName == client.FirstName));
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+
+            TryToSubmitChanges();
         }
 
         internal static void UpdateClient(Client client)
         {
             //Client updateClient = db.Clients.Where(c => c.ClientId == client.ClientId).Single();
             //updateClient = client;
-            try
-            {
-                db.SubmitChanges();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            TryToSubmitChanges();
         }
 
         /* Old Update methods. UpdateClient does it all. Holding on to them for now.
@@ -217,7 +189,7 @@ namespace HumaneSociety
         internal static void RemoveAnimal(Animal animal)
         {
             db.Animals.DeleteOnSubmit(animal);
-            db.SubmitChanges();
+            TryToSubmitChanges();
             // null checking
         }
 
@@ -272,7 +244,7 @@ namespace HumaneSociety
             Species newSpecies = new Species();
             newSpecies.Name = UserInterface.GetStringData("the species", "the name of");
             db.Species.InsertOnSubmit(newSpecies);
-            db.SubmitChanges();
+            TryToSubmitChanges();
             return newSpecies;            
         }
 
@@ -344,14 +316,7 @@ namespace HumaneSociety
                 newShot.DateReceived = DateTime.Now;
                 newShot.Shot = db.Shots.Where(s => s.Name == v).Single();
                 db.AnimalShots.InsertOnSubmit(newShot);
-                try
-                {
-                    db.SubmitChanges();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
+                TryToSubmitChanges();
             }
             else
             {
