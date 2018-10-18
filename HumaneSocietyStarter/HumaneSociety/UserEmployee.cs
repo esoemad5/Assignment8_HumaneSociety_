@@ -120,10 +120,10 @@ namespace HumaneSociety
             bool isFinished = false;
             Console.Clear();
             while(!isFinished){
-                List<string> options = new List<string>() { "Animal found:", animal.Name, animal.Species.Name, "Would you like to:", "1. Get Info", "2. Update Info", "3. Check shots", "4. Return" };
+                List<string> options = new List<string>() { "Animal found:", animal.Name, animal.Species.Name, "Would you like to:", "1. Get Info", "2. Update Info", "3. Check shots", "4. Change Room", "5. Return" };
                 UserInterface.DisplayUserOptions(options);
                 int input = UserInterface.GetIntegerData();
-                if (input == 4)
+                if (input == 5)
                 {
                     isFinished = true;
                     continue;
@@ -147,6 +147,10 @@ namespace HumaneSociety
                     return;
                 case 3:
                     CheckShots(animal);
+                    Console.Clear();
+                    return;
+                case 4:
+                    Query.ChangeAnimalRoom(animal);
                     Console.Clear();
                     return;
                 default:
