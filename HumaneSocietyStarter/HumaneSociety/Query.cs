@@ -42,9 +42,10 @@ namespace HumaneSociety
             Console.ReadKey(true);
         }
 
-        internal static void UpdateEmployee(Employee employee)
+        //TODO
+        internal static void UpdateEmployee(int employeeNumber)
         {
-            throw new NotImplementedException();
+            Employee target = db.Employees.Where(e => e.EmployeeNumber == employeeNumber).Single();
         }
 
         internal static bool EmployeeNumberIsAlreadyInUse(int? employeeNumber)
@@ -70,6 +71,8 @@ namespace HumaneSociety
             TryToSubmitChanges();
         }
 
+
+
         internal static Client GetClient(string userName, string password)
         {
             Client outputClient = db.Clients.
@@ -89,6 +92,7 @@ namespace HumaneSociety
             return db.Animals.Where(x => x.AnimalId == iD).Single();
         }
 
+        //TODO
         internal static void Adopt(Animal animal, Client client)
         {
             animal.AdoptionStatus = "Pending";
@@ -120,7 +124,7 @@ namespace HumaneSociety
             return db.USStates;
         }
 
-        //TODO in here
+        //TODO
         internal static void AddNewClient(string firstName, string lastName, string username, string password, string email, string streetAddress, int zipCode, int state)
         {
             Console.WriteLine("In AddNewClient");
@@ -151,72 +155,6 @@ namespace HumaneSociety
             //updateClient = client;
             TryToSubmitChanges();
         }
-
-        /* Old Update methods. UpdateClient does it all. Holding on to them for now.
-        internal static void updateClient(Client client) // Why not updateIncome/NumberOfKids/HomeSquareFootage????
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static void UpdateUsername(Client client)
-        {
-            db.Clients.Where(c => c.ClientId == client.ClientId).Single().UserName = client.UserName;
-            try
-            {
-                db.SubmitChanges();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-        internal static void UpdateEmail(Client client)
-        {
-            db.Clients.Where(c => c.ClientId == client.ClientId).Single().Email = client.Email;
-            try
-            {
-                db.SubmitChanges();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-        internal static void UpdateAddress(Client client)
-        {
-            throw new NotImplementedException();
-        }
-
-        
-
-        internal static void UpdateFirstName(Client client)
-        {
-            db.Clients.Where(c => c.ClientId == client.ClientId).Single().FirstName = client.FirstName;
-            try
-            {
-                db.SubmitChanges();
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-
-        internal static void UpdateLastName(Client client)
-        {
-            db.Clients.Where(c => c.ClientId == client.ClientId).Single().LastName = client.LastName;
-            try
-            {
-                db.SubmitChanges();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-        }
-        */
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
         {
@@ -322,7 +260,7 @@ namespace HumaneSociety
         {
             RetrieveEmployeeUser(employee.Email, employee.EmployeeNumber).UserName = employee.UserName;
             RetrieveEmployeeUser(employee.Email, employee.EmployeeNumber).Password = employee.Password;
-            // Null Check
+            TryToSubmitChanges();
         }
 
         internal static bool CheckEmployeeUserNameExist(string username)
