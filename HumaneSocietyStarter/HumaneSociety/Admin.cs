@@ -51,20 +51,18 @@ namespace HumaneSociety
                 ReadEmployee();
                 RunUserMenus();
             }
-            /*
             else if (input == "4" || input.ToLower() == "update")
             {
                 UpdateEmployee();
                 RunUserMenus();
             }
-            */
             else
             {
                 UserInterface.DisplayUserOptions("Input not recognized please try again or type exit");
                 RunUserMenus();
             }
         }
-        /*
+
         private void UpdateEmployee()
         {
             try
@@ -78,7 +76,7 @@ namespace HumaneSociety
                 UserInterface.DisplayUserOptions("Employee update unsuccessful please try again or type exit;");
                 return;
             }
-        }*/
+        }
 
         private void ReadEmployee()
         {
