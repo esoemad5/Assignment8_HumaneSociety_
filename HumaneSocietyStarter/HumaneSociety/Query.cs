@@ -11,12 +11,14 @@ namespace HumaneSociety
         private static HumaneSocietyDataContext db = new HumaneSocietyDataContext();
 
         // Admin queries
-        internal static void ReadEmployee(int employeeId)
+        internal static void ReadEmployee(int? employeeId)
         {
             Employee employee = db.Employees.Where(e => e.EmployeeNumber == employeeId).Single();
             UserInterface.DisplayEmployee(employee);
+            Console.ReadKey();
         }
 
+        // Animal has a foreign key to Employee, database wont let the program delete. Works fine if no animal is assigned to the employee
         internal static void DeleteEmployee(Employee employee)
         {
             Employee target = db.Employees.Where(e => e.EmployeeNumber == employee.EmployeeNumber && e.LastName == employee.LastName).Single();
@@ -204,7 +206,7 @@ namespace HumaneSociety
         internal static Species GetSpecies()
         {
             //Employee target = db.Employees.Where(e => e.EmployeeNumber == employeeNumber).Single();
-            //Above is a better solution (it uses more LINQ which is what the instructors want
+            //Above is a better solution (it uses more LINQ which is what the instructors want)
             List<Species> allSpecies = new List<Species>();
             foreach (Species s in db.Species)
             {
