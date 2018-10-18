@@ -303,17 +303,25 @@ namespace HumaneSociety
         {
             AnimalShot newShot = new AnimalShot();
             //newShot.AnimalId = animal.AnimalId;
-            newShot.Animal = animal;            
-            
-            newShot.DateReceived = DateTime.Now;
-            db.AnimalShots.InsertOnSubmit(newShot);
-            try
+            if (CheckShot(v))
             {
-                db.SubmitChanges();
+                newShot.Animal = animal;
+
+                newShot.DateReceived = DateTime.Now;
+                newShot.Shot = db.Shots.Where(s => s.Name == v).Single();
+                db.AnimalShots.InsertOnSubmit(newShot);
+                try
+                {
+                    db.SubmitChanges();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
-            catch (Exception e)
+            else
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine("Shot does not exist! \n");
             }
         }
 

@@ -11,7 +11,7 @@ namespace HumaneSociety
         static void Main(string[] args)
         {
             // PointOfEntry.Run();               
-            Query.UpdateShot("Flu", Query.GetAnimalByID(2));
+            Query.UpdateShot("Fdlu", Query.GetAnimalByID(2));
             Console.WriteLine();
             Console.ReadLine();
         }
