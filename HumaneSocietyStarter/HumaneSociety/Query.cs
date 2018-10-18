@@ -245,11 +245,12 @@ namespace HumaneSociety
             {
                 UserInterface.DisplayUserOptions("- " + d.Name);
             }
-        }
+        }        
 
         internal static void AddAnimal(Animal animal)
         {
-            throw new NotImplementedException();
+            db.Animals.InsertOnSubmit(animal);
+            TryToSubmitChanges();
         }
 
         internal static Employee EmployeeLogin(string userName, string password)

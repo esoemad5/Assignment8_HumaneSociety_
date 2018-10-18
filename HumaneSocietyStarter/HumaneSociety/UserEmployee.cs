@@ -254,15 +254,14 @@ namespace HumaneSociety
             animal.KidFriendly = UserInterface.GetBitData("the animal", "child friendly");
             animal.PetFriendly = UserInterface.GetBitData("the animal", "pet friendly");
             animal.Weight = UserInterface.GetIntegerData("the animal", "the weight of the");
-
             animal.DietPlan= Query.GetDietPlan();
-            //Gender
-            //Employee
-            //Adoption status
-
-            //put the animal in a room; update the rooms table, animal object does not store this data
-            Query.AddAnimal(animal);
+            animal.Gender = UserInterface.GetStringData("gender? ('male' or 'female')", "the animal's");
+            animal.Employee = employee;
+            animal.AdoptionStatus = "Available";                        
+            Query.AddAnimal(animal);            
+            UserInterface.DisplayUserOptions(animal.Name + " added! \n");
         }
+
         protected override void LogInPreExistingUser()
         {
             List<string> options = new List<string>() { "Please log in", "Enter your username (CaSe SeNsItIvE)" };
