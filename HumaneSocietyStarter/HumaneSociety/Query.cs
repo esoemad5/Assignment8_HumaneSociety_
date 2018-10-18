@@ -8,22 +8,6 @@ namespace HumaneSociety
 {
     public static class Query
     {
-        public static void FixDatabase()
-        {
-            for(int i = 6; i <= 10; i++)
-            {
-                db.Rooms.Where(r => r.RoomId == i).Single().AnimalId = null;
-                try
-                {
-                    db.SubmitChanges();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-            }
-            
-        }
         private static HumaneSocietyDataContext db = new HumaneSocietyDataContext();
 
         internal static void RunEmployeeQueries(Employee employee, string v)
