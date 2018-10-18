@@ -13,7 +13,15 @@ namespace HumaneSociety
         // Admin queries
         internal static void ReadEmployee(Employee employee)
         {
-            throw new NotImplementedException();
+            employee = db.Employees.Where(e => e.EmployeeNumber == employee.EmployeeNumber).Single();
+            UserInterface.DisplayUserOptions("Name: " + employee.FirstName + " " + employee.LastName + "\n");
+            UserInterface.DisplayUserOptions("Email: " + employee.Email + "\n");
+            UserInterface.DisplayUserOptions("Employee Number: " + employee.EmployeeNumber);
+            UserInterface.DisplayUserOptions("Assigned Animals: ");
+            foreach(Animal a in employee.Animals)
+            {
+                UserInterface.DisplayUserOptions(a.Name + "\n");
+            }
         }
 
         internal static void DeleteEmployee(Employee employee)
