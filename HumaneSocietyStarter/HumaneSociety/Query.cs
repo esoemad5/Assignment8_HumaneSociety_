@@ -43,8 +43,7 @@ namespace HumaneSociety
             adoption.Client = adoptor;
             adoption.Animal = adoptee;
             adoption.ApprovalStatus = "Pending";
-
-            //These lines will need to be changed in the future
+            //These lines will need to be changed in the future if Adoption Fees will vary or a method for collecting payment actualizes
             adoption.AdoptionFee = 75;
             adoption.PaymentCollected = true;
 
@@ -60,7 +59,7 @@ namespace HumaneSociety
 
         }
 
-        internal static IQueryable<Animal> SearchForAnimalByMultipleTraits() // Simply lists animals right now
+        internal static IQueryable<Animal> SearchForAnimalByMultipleTraits() // Only lists all the animals right now. Doesn't search
         {
             return db.Animals.Where(x => true);
         }
@@ -75,6 +74,7 @@ namespace HumaneSociety
             return db.USStates;
         }
 
+        //TODO in here
         internal static void AddNewClient(string firstName, string lastName, string username, string password, string email, string streetAddress, int zipCode, int state)
         {
             Console.WriteLine("In AddNewClient");
@@ -113,6 +113,21 @@ namespace HumaneSociety
             }
         }
 
+
+        internal static void UpdateClient(Client client)
+        {
+            Client updateClient = db.Clients.Where(c => c.ClientId == client.ClientId).Single();
+            updateClient = client;
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+        /* Old Update methods. UpdateClient does it all. Holding on to them for now.
         internal static void updateClient(Client client) // Why not updateIncome/NumberOfKids/HomeSquareFootage????
         {
             throw new NotImplementedException();
@@ -179,6 +194,7 @@ namespace HumaneSociety
                 Console.WriteLine(e.Message);
             }
         }
+        */
 
         internal static void RemoveAnimal(Animal animal)
         {

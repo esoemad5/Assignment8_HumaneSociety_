@@ -330,6 +330,7 @@ namespace HumaneSociety
             {
                 case 1:
                     UpdateName();
+                    
                     break;
                 case 2:
                     UpdateAddress();
@@ -368,15 +369,18 @@ namespace HumaneSociety
             {
                 case "small":
                     client.HomeSquareFootage= 1;
-                    Query.updateClient(client);
+                    Query.UpdateClient(client);
+                    //Query.updateClient(client);
                     break;
                 case "medium":
                     client.HomeSquareFootage = 2;
-                    Query.updateClient(client);
+                    Query.UpdateClient(client);
+                    //Query.updateClient(client);
                     break;
                 case "large":
                     client.HomeSquareFootage = 3;
-                    Query.updateClient(client);
+                    Query.UpdateClient(client);
+                    //Query.updateClient(client);
                     break;
                 default:
                     UserInterface.DisplayUserOptions("Incorrect Input type please enter small, medium, or large");
@@ -390,14 +394,16 @@ namespace HumaneSociety
             Console.Clear();
             UserInterface.DisplayUserOptions("How many childern are in your household?");
             client.NumberOfKids = UserInterface.GetIntegerData();
-            Query.updateClient(client);
+            Query.UpdateClient(client);
+            //Query.updateClient(client);
         }
 
         private void UpdateIncome()
         {
             UserInterface.DisplayUserOptions("What is your household income? (If you would like to omit it enter 0)");
             client.Income = UserInterface.GetIntegerData();
-            Query.updateClient(client);
+            Query.UpdateClient(client);
+            //Query.updateClient(client);
         }
 
         private void UpdatePassword()
@@ -406,7 +412,8 @@ namespace HumaneSociety
             Console.Clear();
             UserInterface.DisplayUserOptions("Current Password: " + client.Password + " What is your new Password?");
             client.Password = UserInterface.GetUserInput();
-            Query.updateClient(client);
+            Query.UpdateClient(client);
+            //Query.updateClient(client);
         }
 
         private void UpdateUsername()
@@ -414,7 +421,8 @@ namespace HumaneSociety
             Console.Clear();
             UserInterface.DisplayUserOptions("Current Username: " + client.UserName);
             client.UserName = GetUserName();
-            Query.UpdateUsername(client);
+            Query.UpdateClient(client);
+            //Query.UpdateUsername(client);
         }
 
         private void UpdateEmail()
@@ -422,7 +430,8 @@ namespace HumaneSociety
             Console.Clear();
             UserInterface.DisplayUserOptions("Current email: " + client.Email);
             client.Email = GetEmail();
-            Query.UpdateEmail(client);
+            Query.UpdateClient(client);
+            //Query.UpdateEmail(client);
         }
 
         public int GetZipCode()
@@ -455,7 +464,8 @@ namespace HumaneSociety
             client.Address.USStateId = GetState();
             UserInterface.DisplayUserOptions("Please enter your street address");
             client.Address.AddressLine1 = UserInterface.GetUserInput();
-            Query.UpdateAddress(client);
+            Query.UpdateClient(client);
+            //Query.UpdateAddress(client);
 
         }
         public void UpdateName()
@@ -468,22 +478,26 @@ namespace HumaneSociety
             {
                 UserInterface.DisplayUserOptions("Please enter your new first name.");
                 client.FirstName = UserInterface.GetUserInput();
-                Query.UpdateFirstName(client);
+                Query.UpdateClient(client);
+                //Query.UpdateFirstName(client);
             }
             else if (input == "last" || input == "2")
             {
                 UserInterface.DisplayUserOptions("Please enter your new last name.");
                 client.LastName = UserInterface.GetUserInput();
-                Query.UpdateLastName(client);
+                Query.UpdateClient(client);
+                //Query.UpdateLastName(client);
             }
             else if(input == "both" || input == "3")
             {
                 UserInterface.DisplayUserOptions("Please enter your new first name.");
                 client.FirstName = UserInterface.GetUserInput();
-                Query.UpdateFirstName(client);
+                Query.UpdateClient(client);
+                //Query.UpdateFirstName(client);
                 UserInterface.DisplayUserOptions("Please enter your new last name.");
                 client.LastName = UserInterface.GetUserInput();
-                Query.UpdateLastName(client);
+                Query.UpdateClient(client);
+                //Query.UpdateLastName(client);
             }
             else
             {
