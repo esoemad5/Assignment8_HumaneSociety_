@@ -31,7 +31,7 @@ namespace HumaneSociety
 
         internal static Animal GetAnimalByID(int iD)
         {
-            throw new NotImplementedException();
+            return db.Animals.Where(x => x.AnimalId == iD).Single();
         }
 
         internal static void Adopt(Animal animal, Client client)
