@@ -26,7 +26,7 @@ namespace HumaneSociety
 
         internal static IQueryable<Adoption> GetUserAdoptionStatus(Client client)
         {
-            throw new NotImplementedException();
+            return db.Adoptions.Where(a => a.ClientId == client.ClientId);
         }
 
         internal static Animal GetAnimalByID(int iD)
