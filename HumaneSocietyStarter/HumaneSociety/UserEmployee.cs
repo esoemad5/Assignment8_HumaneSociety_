@@ -120,8 +120,8 @@ namespace HumaneSociety
         private void RunCheckMenu(Animal animal)
         {
             bool isFinished = false;
-            Console.Clear();
-            while(!isFinished){
+            Console.Clear();            
+            while(!isFinished){                
                 List<string> options = new List<string>() { "Animal found:", animal.Name, animal.Species.Name, "Would you like to:", "1. Get Info", "2. Update Info", "3. Check shots", "4. Change Room", "5. Return" };
                 UserInterface.DisplayUserOptions(options);
                 int input = UserInterface.GetIntegerData();
