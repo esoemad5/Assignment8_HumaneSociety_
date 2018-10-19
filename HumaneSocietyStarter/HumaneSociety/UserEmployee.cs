@@ -267,7 +267,8 @@ namespace HumaneSociety
             animal.Gender = UserInterface.GetStringData("gender? ('male' or 'female')", "the animal's");
             animal.Employee = employee;
             animal.AdoptionStatus = "Available";                        
-            Query.AddAnimal(animal);            
+            Query.AddAnimal(animal);
+            Query.ChangeAnimalRoom(animal);
             UserInterface.DisplayUserOptions(animal.Name + " added! \n");
         }
 

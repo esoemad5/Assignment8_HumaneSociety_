@@ -440,7 +440,14 @@ namespace HumaneSociety
 
         internal static void ChangeAnimalRoom(Animal animal)
         {
-            db.Rooms.Where(r => r.Animal == animal).Single().AnimalId = null;
+            try
+            {
+                db.Rooms.Where(r => r.Animal == animal).Single().AnimalId = null;
+            }
+            catch (Exception)
+            {
+
+            }
             DisplayAvailableRooms();
             int newRoomNumber = UserInterface.GetIntegerData("room number", "the new");
             db.Rooms.Where(r => r.RoomNumber == newRoomNumber).Single().AnimalId = animal.AnimalId;
