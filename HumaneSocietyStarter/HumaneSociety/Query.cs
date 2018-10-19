@@ -201,10 +201,68 @@ namespace HumaneSociety
             return db.Animals.Where(x => true);
         }
 
-        public static void _SearchForAnimalByMultipleTraits()
+        public static IQueryable<Animal> SearchAnimalsByTrait()
         {
-
+            UserInterface.DisplayUserOptions("Whate Attribute would you like to search by?");
+            string input = Console.ReadLine();
+            switch (input)
+            {
+                case "Name":
+                    return SearchByName(UserInterface.GetStringData("name", "the"));
+                case "Species":
+                    return SearchBySpecies(UserInterface.GetStringData("Species", "the"));
+                case "Weight":
+                    return SearchByWeight(UserInterface.GetIntegerData("Weight", "the"));
+                case "Age":
+                    return SearchByAge(UserInterface.GetIntegerData("Age", "the"));
+                case "Diet Plan":
+                    return SearchByDietPlan(UserInterface.GetStringData("Diet Plan", "the"));
+                case "Kid Friendly":
+                    return SearchByKidFriendly(UserInterface.GetStringData("Kid Firendly status", "the"));
+                case "Pet Friendly":
+                    return SearchByPetFriendly(UserInterface.GetStringData("Pet Friendly status", "the"));
+                case "Gender":
+                    return SearchByGender(UserInterface.GetStringData("Gender", "the"));
+                default:
+                    Console.WriteLine("Not a vaild criterea.");
+                    return SearchAnimalsByTrait();
+            }
         }
+
+        private static IQueryable<Animal> SearchByName(string name)
+        {
+            return db.Animals.Where(a => a.Name == name);
+        }
+
+        private static IQueryable<Animal> SearchBySpecies(string species)
+        {
+            return db.Animals.Where(a => a.Species.Name == species);
+        }
+        private static IQueryable<Animal> SearchByWeight(int weight)
+        {
+            return db.Animals.Where(a => a.Weight == weight);
+        }
+        private static IQueryable<Animal> SearchByAge(int age)
+        {
+            return db.Animals.Where(a => a.Age == age);
+        }
+        private static IQueryable<Animal> SearchByDietPlan(string dietPlan)
+        {
+            return db.Animals.Where(a => a.DietPlan.Name == dietPlan);
+        }
+        private static IQueryable<Animal> SearchByKidFriendly(string kidFriendly)
+        {
+            return db.Animals.Where(a => a.KidFriendly.ToString() == kidFriendly);
+        }
+        private static IQueryable<Animal> SearchByPetFriendly(string petFriendly)
+        {
+            return db.Animals.Where(a => a.PetFriendly.ToString() == petFriendly);
+        }
+        private static IQueryable<Animal> SearchByGender(string Gender)
+        {
+            return db.Animals.Where(a => a.Gender == Gender);
+        }
+
     }
 
     //Employee
