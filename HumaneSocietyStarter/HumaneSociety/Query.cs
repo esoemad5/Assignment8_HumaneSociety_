@@ -457,6 +457,17 @@ namespace HumaneSociety
             return shotExists;
         }
 
+        internal static void DisplayAvailableShots()
+        {
+            var shots = db.Shots.Where(s => true);
+            UserInterface.DisplayUserOptions("Available shots are: ");
+            foreach(Shot s in shots)
+            {
+                UserInterface.DisplayUserOptions("- " + s.Name);
+            }
+            UserInterface.DisplayUserOptions("Please enter the name of the desired shot.");
+        }
+
         internal static void EnterUpdate(Animal animal, Dictionary<int, string> updates)
         {
             foreach (KeyValuePair<int, string> entry in updates)
