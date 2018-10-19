@@ -7,7 +7,8 @@ using System.IO;
 
 namespace HumaneSociety
 {
-    public static class Query
+    // Admin
+    public static partial class Query
     {
         private static HumaneSocietyDataContext db = new HumaneSocietyDataContext();
 
@@ -107,6 +108,11 @@ namespace HumaneSociety
             TryToSubmitChanges();
         }
 
+    }
+
+    // Customer
+    public static partial class Query
+    {
         internal static Client GetClient(string userName, string password)
         {
             Client outputClient = db.Clients.
@@ -141,16 +147,6 @@ namespace HumaneSociety
             db.Adoptions.InsertOnSubmit(adoption);
             TryToSubmitChanges();
 
-        }
-
-        internal static IQueryable<Animal> SearchForAnimalByMultipleTraits() // Only lists all the animals right now. Doesn't search
-        {
-            return db.Animals.Where(x => true);
-        }
-
-        internal static IQueryable<Client> RetrieveClients()
-        {
-            return db.Clients;
         }
 
         internal static IQueryable<USState> GetStates()
@@ -190,6 +186,24 @@ namespace HumaneSociety
             TryToSubmitChanges();
         }
 
+        internal static IQueryable<Client> RetrieveClients()
+        {
+            return db.Clients;
+        }
+    }
+
+    // Customer and Employee (Just 1 method)
+    public static partial class Query
+    {
+        internal static IQueryable<Animal> SearchForAnimalByMultipleTraits() // Only lists all the animals right now. Doesn't search
+        {
+            return db.Animals.Where(x => true);
+        }
+    }
+
+    //Employee
+    public static partial class Query
+    {
         internal static IQueryable<Adoption> GetPendingAdoptions()
         {
             throw new NotImplementedException();
@@ -449,7 +463,12 @@ namespace HumaneSociety
             }
             Console.WriteLine("\n");
         }
+    }
 
+
+    // CSV and db commit
+    public static partial class Query
+    {
         internal static void GetAnimalsByCSV(string filename)
         {
             // EXTRA FIELD IN CSV???
