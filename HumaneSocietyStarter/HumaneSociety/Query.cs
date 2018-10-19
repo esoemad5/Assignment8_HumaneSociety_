@@ -12,7 +12,7 @@ namespace HumaneSociety
         private static HumaneSocietyDataContext db = new HumaneSocietyDataContext();
 
         // Admin queries
-        internal static void ReadEmployee(int employeeId)
+        internal static void ReadEmployee(int? employeeId)
         {
             Employee employee = db.Employees.Where(e => e.EmployeeNumber == employeeId).Single();
             UserInterface.DisplayEmployee(employee);
