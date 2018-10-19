@@ -11,7 +11,8 @@ namespace HumaneSociety
     {
         static void Main(string[] args)
         {
-            PointOfEntry.Run();
+            //PointOfEntry.Run();
+            Query.UpdateDietPlan();
         }
     }
 }
