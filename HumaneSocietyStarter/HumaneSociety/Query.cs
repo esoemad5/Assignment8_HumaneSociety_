@@ -12,11 +12,12 @@ namespace HumaneSociety
         private static HumaneSocietyDataContext db = new HumaneSocietyDataContext();
 
         // Admin queries
-        internal static void ReadEmployee(int employeeId)
+        internal static void ReadEmployee(int? employeeId)
         {
             Employee employee = db.Employees.Where(e => e.EmployeeNumber == employeeId).Single();
             UserInterface.DisplayEmployee(employee);
-
+            UserInterface.DisplayUserOptions("Press any key to continue.");
+            Console.ReadKey();
         }
 
         internal static void DeleteEmployee(Employee employee)
@@ -42,8 +43,9 @@ namespace HumaneSociety
         {
             Employee target = db.Employees.Where(e => e.EmployeeNumber == employeeNumber).Single();
             UserInterface.DisplayEmployee(target);
-            Console.WriteLine("Which field would you like to change?");
-            Console.ReadLine();
+            UserInterface.DisplayUserOptions("Which field would you like to change?");
+            // How to move animal assignment?
+            UserInterface.UpdateEmployee_MenuSelection(target);
         }
 
         public static void UpdateEmployee_FirstName(string newFirstName, Employee employee)
@@ -79,7 +81,7 @@ namespace HumaneSociety
         //TODO
         public static void UpdateEmployee_AssignedAnimals()
         {
-
+            throw new NotImplementedException();
         }
 
         internal static bool EmployeeNumberIsAlreadyInUse(int? employeeNumber)
@@ -104,8 +106,6 @@ namespace HumaneSociety
             db.Employees.InsertOnSubmit(employee);
             TryToSubmitChanges();
         }
-
-
 
         internal static Client GetClient(string userName, string password)
         {
@@ -360,7 +360,6 @@ namespace HumaneSociety
             return shotExists;
         }
 
-
         internal static void EnterUpdate(Animal animal, Dictionary<int, string> updates)
         {
             foreach (KeyValuePair<int, string> entry in updates)
@@ -463,6 +462,7 @@ namespace HumaneSociety
             .Select(l => l.Split(',').Select(s => s.Trim()).ToArray())
             .Where(a => true);
 
+            // Magic numbers?
             foreach (string[] x in filteredResults)
             {
                 Animal newAnimal = new Animal();
