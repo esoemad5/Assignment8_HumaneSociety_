@@ -13,6 +13,9 @@ VALUES ('Ferret');
 INSERT INTO Species (Name)
 VALUES ('Rabbit');
 
+INSERT INTO Species (Name)
+VALUES ('Species Not Entered');
+
 INSERT INTO DietPlans (Name, FoodType, FoodAmountInCups)
 VALUES ('VeryLittle', 'kibble' , 1);
 

@@ -280,6 +280,15 @@ namespace HumaneSociety
             // null checking
         }
 
+        internal static void RemoveSpecieslessAnimals()
+        {
+            var badAnimals = db.Animals.Where(a => a.SpeciesId == 9);
+            foreach(Animal a in badAnimals)
+            {
+                RemoveAnimal(a);
+            }
+        }
+
         internal static Species GetSpecies()
         {
             //Employee target = db.Employees.Where(e => e.EmployeeNumber == employeeNumber).Single();
@@ -485,11 +494,18 @@ namespace HumaneSociety
                 }
             }
             TryToSubmitChanges();
-        }
+        }        
 
         internal static void ChangeAnimalRoom(Animal animal)
         {
-            db.Rooms.Where(r => r.Animal == animal).Single().AnimalId = null;
+            try
+            {
+                db.Rooms.Where(r => r.Animal == animal).Single().AnimalId = null;
+            }
+            catch (Exception)
+            {
+
+            }
             DisplayAvailableRooms();
             int newRoomNumber = UserInterface.GetIntegerData("room number", "the new");
             db.Rooms.Where(r => r.RoomNumber == newRoomNumber).Single().AnimalId = animal.AnimalId;
@@ -549,6 +565,13 @@ namespace HumaneSociety
             foreach (string[] x in filteredResults)
             {
                 Animal newAnimal = new Animal();
+                if (!RoomsAvailable())
+                {
+                    Console.Clear();
+                    UserInterface.DisplayUserOptions("No rooms available for more animals.");                    
+                    return;
+                }
+
                 newAnimal.Name = x[1];
                 newAnimal.Weight = Int32.Parse(x[3]);
                 newAnimal.Age = Int32.Parse(x[4]);
@@ -556,12 +579,11 @@ namespace HumaneSociety
                 newAnimal.KidFriendly = StringValueToBool(x[8]);
                 newAnimal.PetFriendly = StringValueToBool(x[9]);
                 newAnimal.AdoptionStatus = x[11];
+                newAnimal.Species = db.Species.Where(s => s.Name == "Species Not Entered").Single();
                 AddAnimal(newAnimal); // animal needs employee?
-                newAnimal = null; // reset values IS this needed?
+                ChangeAnimalRoom(newAnimal);
+                newAnimal = null; // reset values IS this needed?                
             }
-
-
-
         }
 
         private static bool StringValueToBool(string numberString)
