@@ -1,6 +1,9 @@
+Animals UPdate info doesnt work
+Changing room shows rooms with animals in them (Only seems to happen when changing an animals room)
+can put animals into a room that is already occupied
+unhandled exception for a room nuber > 10
 
 
-(10 points) As a humane society employee, I want to be able to update an animal’s status to “adopted” after it becomes adopted, so that it is known exactly what animals have been adopted.
 
 (10 points) As a humane society employee, I want to be able to create new diet plans that include the type and amount of food the animals need and save it in the database. I also want to be able to update existing diet plans.
 

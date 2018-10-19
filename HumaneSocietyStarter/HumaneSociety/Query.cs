@@ -512,14 +512,23 @@ namespace HumaneSociety
             {
                 db.Rooms.Where(r => r.Animal == animal).Single().AnimalId = null;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                Console.WriteLine(e.Message);
             }
             DisplayAvailableRooms();
             int newRoomNumber = UserInterface.GetIntegerData("room number", "the new");
-            db.Rooms.Where(r => r.RoomNumber == newRoomNumber).Single().AnimalId = animal.AnimalId;
-            TryToSubmitChanges();
+            try
+            {
+                db.Rooms.Where(r => r.RoomNumber == newRoomNumber).Single().AnimalId = animal.AnimalId;
+                TryToSubmitChanges();
+            }
+            catch (InvalidOperationException)
+            {
+                Console.WriteLine("Multiple rooms with the same number or you have selected a room that does not exist. Try again.");
+                ChangeAnimalRoom(animal);
+            }
+            
         }
 
         internal static void ClearRoom(int roomNumber)
