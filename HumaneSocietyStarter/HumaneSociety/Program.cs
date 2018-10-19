@@ -11,9 +11,9 @@ namespace HumaneSociety
     {
         static void Main(string[] args)
         {
-            // PointOfEntry.Run();
+            PointOfEntry.Run();
             
-            Query.GetAnimalsByCSV("animals.csv");
+            //Query.GetAnimalsByCSV("animals.csv");
             Console.ReadLine();
         }
     }
