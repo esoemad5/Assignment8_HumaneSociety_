@@ -1,13 +1,8 @@
 Animals UPdate info doesnt work
-Changing room shows rooms with animals in them (Only seems to happen when changing an animals room)
-can put animals into a room that is already occupied
-unhandled exception for a room nuber > 10
+Remove animal doesnt work
+
 
 
 
 (10 points) As a humane society employee, I want to be able to create new diet plans that include the type and amount of food the animals need and save it in the database. I also want to be able to update existing diet plans.
 
-
-
-
-(10 points) As a humane society employee, I want to be able to keep track of which animals have had their shots as well as have the option to give an animal its shot if it has not received it yet, and update that in the database.
