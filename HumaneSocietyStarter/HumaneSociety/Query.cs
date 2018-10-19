@@ -77,6 +77,7 @@ namespace HumaneSociety
             Console.WriteLine("About to delete {0} {1}, EmployeeNumber: {2}. Are you sure?(y/n)", target.FirstName, target.LastName, target.EmployeeNumber);
             if (Console.ReadKey().KeyChar == 'y')
             {
+                RemoveEmployeeFromAnimal(target);
                 db.Employees.DeleteOnSubmit(target);
                 TryToSubmitChanges();
                 Console.WriteLine("Employee deleted.");
@@ -87,6 +88,17 @@ namespace HumaneSociety
             }
             Console.WriteLine("Press any key to return to the previous menu.");
             Console.ReadKey(true);
+        }
+
+        private static void RemoveEmployeeFromAnimal(Employee employee)
+        {
+            List<Animal> animalsAssignedToEmployee = db.Animals.Where(a => a.EmployeeId == employee.EmployeeId).ToList();
+            foreach(Animal animal in animalsAssignedToEmployee)
+            {
+                animal.EmployeeId = null;
+            }
+
+            TryToSubmitChanges();
         }
 
         internal static bool EmployeeNumberIsAlreadyInUse(int? employeeNumber)
@@ -180,8 +192,6 @@ namespace HumaneSociety
 
         internal static void UpdateClient(Client client)
         {
-            //Client updateClient = db.Clients.Where(c => c.ClientId == client.ClientId).Single();
-            //updateClient = client;
             TryToSubmitChanges();
         }
 
