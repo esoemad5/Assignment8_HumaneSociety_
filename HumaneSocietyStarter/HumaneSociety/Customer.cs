@@ -58,7 +58,7 @@ namespace HumaneSociety
             switch (input)
             {
                 case 1:
-                    RunSearch();
+                    RunSearch(Query.SearchForAnimalByMultipleTraits());
                     RunUserMenus();
                     return;
                 case 2:
@@ -114,25 +114,25 @@ namespace HumaneSociety
             }
         }
 
-        private void RunSearch()
+        private void RunSearch(IQueryable<Animal> animals)
         {
-            Console.Clear();            
-            var animals = Query.SearchForAnimalByMultipleTraits().ToList();
-            if (animals.Count > 1)
+            List <Animal> animalsList= animals.ToList();
+            Console.Clear();
+            if (animalsList.Count > 1)
             {
                 UserInterface.DisplayUserOptions("Several animals found");
-                UserInterface.DisplayAnimals(animals);
+                UserInterface.DisplayAnimals(animalsList);
+                RunSearch(Query.SearchAnimalsByTrait(animals));
             }
-            else if(animals.Count == 0)
+            else if(animalsList.Count == 0)
             {
                 UserInterface.DisplayUserOptions("No animals found please try another search");
             }
             else
             {
-                UserInterface.DisplayAnimalInfo(animals[0]);
+                UserInterface.DisplayAnimalInfo(animalsList[0]);
             }
-            UserInterface.DisplayUserOptions("Press enter to continue");
-            Console.ReadLine();
+            
         }
 
         private void CheckIfAccountComplete()

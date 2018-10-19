@@ -193,18 +193,76 @@ namespace HumaneSociety
         }
     }
 
-    // Customer and Employee (Just 1 method)
+    // Customer and Employee (Searching)
     public static partial class Query
     {
-        internal static IQueryable<Animal> SearchForAnimalByMultipleTraits() // Only lists all the animals right now. Doesn't search
+        internal static IQueryable<Animal> SearchForAnimalByMultipleTraits()
         {
             return db.Animals.Where(x => true);
         }
 
-        public static void _SearchForAnimalByMultipleTraits()
+        public static IQueryable<Animal> SearchAnimalsByTrait(IQueryable<Animal> animals)
         {
-
+            UserInterface.DisplayUserOptions("Whate Attribute would you like to search by?");
+            string input = Console.ReadLine();
+            switch (input)
+            {
+                case "Name":
+                    return SearchByName(UserInterface.GetStringData("name", "the"), animals);
+                case "Species":
+                    return SearchBySpecies(UserInterface.GetStringData("Species", "the"), animals);
+                case "Weight":
+                    return SearchByWeight(UserInterface.GetIntegerData("Weight", "the"), animals);
+                case "Age":
+                    return SearchByAge(UserInterface.GetIntegerData("Age", "the"), animals);
+                case "Diet Plan":
+                    return SearchByDietPlan(UserInterface.GetStringData("Diet Plan", "the"), animals);
+                case "Kid Friendly":
+                    return SearchByKidFriendly(UserInterface.GetStringData("Kid Firendly status", "the"), animals);
+                case "Pet Friendly":
+                    return SearchByPetFriendly(UserInterface.GetStringData("Pet Friendly status", "the"), animals);
+                case "Gender":
+                    return SearchByGender(UserInterface.GetStringData("Gender", "the"), animals);
+                default:
+                    Console.WriteLine("Not a vaild criterea.");
+                    return SearchAnimalsByTrait(animals);
+            }
         }
+
+        private static IQueryable<Animal> SearchByName(string name, IQueryable<Animal> animals)
+        {
+            return animals.Where(a => a.Name == name);
+        }
+
+        private static IQueryable<Animal> SearchBySpecies(string species, IQueryable<Animal> animals)
+        {
+            return animals.Where(a => a.Species.Name == species);
+        }
+        private static IQueryable<Animal> SearchByWeight(int weight, IQueryable<Animal> animals)
+        {
+            return animals.Where(a => a.Weight == weight);
+        }
+        private static IQueryable<Animal> SearchByAge(int age, IQueryable<Animal> animals)
+        {
+            return animals.Where(a => a.Age == age);
+        }
+        private static IQueryable<Animal> SearchByDietPlan(string dietPlan, IQueryable<Animal> animals)
+        {
+            return animals.Where(a => a.DietPlan.Name == dietPlan);
+        }
+        private static IQueryable<Animal> SearchByKidFriendly(string kidFriendly, IQueryable<Animal> animals)
+        {
+            return animals.Where(a => a.KidFriendly.ToString() == kidFriendly);
+        }
+        private static IQueryable<Animal> SearchByPetFriendly(string petFriendly, IQueryable<Animal> animals)
+        {
+            return animals.Where(a => a.PetFriendly.ToString() == petFriendly);
+        }
+        private static IQueryable<Animal> SearchByGender(string Gender, IQueryable<Animal> animals)
+        {
+            return animals.Where(a => a.Gender == Gender);
+        }
+
     }
 
     //Employee
@@ -212,7 +270,7 @@ namespace HumaneSociety
     {
         internal static IQueryable<Adoption> GetPendingAdoptions()
         {
-            throw new NotImplementedException();
+            return db.Adoptions.Where(a => a.ApprovalStatus == "Pending");
         }
 
         internal static void RemoveAnimal(Animal animal)
@@ -325,7 +383,16 @@ namespace HumaneSociety
 
         internal static void UpdateAdoption(bool v, Adoption adoption)
         {
-            throw new NotImplementedException();
+            if (v)
+            {
+                adoption.ApprovalStatus = "Approved";
+            }
+            else
+            {
+                adoption.ApprovalStatus = "Denied";
+            }
+
+            TryToSubmitChanges();
         }
 
         internal static Room GetRoom(int animalId)
@@ -487,7 +554,6 @@ namespace HumaneSociety
             Console.WriteLine("\n");
         }
     }
-
 
     // CSV and db commit
     public static partial class Query
