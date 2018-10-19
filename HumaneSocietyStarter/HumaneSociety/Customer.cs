@@ -368,17 +368,14 @@ namespace HumaneSociety
                 case "small":
                     client.HomeSquareFootage= 1;
                     Query.UpdateClient(client);
-                    //Query.updateClient(client);
                     break;
                 case "medium":
                     client.HomeSquareFootage = 2;
                     Query.UpdateClient(client);
-                    //Query.updateClient(client);
                     break;
                 case "large":
                     client.HomeSquareFootage = 3;
                     Query.UpdateClient(client);
-                    //Query.updateClient(client);
                     break;
                 default:
                     UserInterface.DisplayUserOptions("Incorrect Input type please enter small, medium, or large");
@@ -393,7 +390,6 @@ namespace HumaneSociety
             UserInterface.DisplayUserOptions("How many childern are in your household?");
             client.NumberOfKids = UserInterface.GetIntegerData();
             Query.UpdateClient(client);
-            //Query.updateClient(client);
         }
 
         private void UpdateIncome()
@@ -401,7 +397,6 @@ namespace HumaneSociety
             UserInterface.DisplayUserOptions("What is your household income? (If you would like to omit it enter 0)");
             client.Income = UserInterface.GetIntegerData();
             Query.UpdateClient(client);
-            //Query.updateClient(client);
         }
 
         private void UpdatePassword()
@@ -411,7 +406,6 @@ namespace HumaneSociety
             UserInterface.DisplayUserOptions("Current Password: " + client.Password + " What is your new Password?");
             client.Password = UserInterface.GetUserInput();
             Query.UpdateClient(client);
-            //Query.updateClient(client);
         }
 
         private void UpdateUsername()
@@ -420,7 +414,6 @@ namespace HumaneSociety
             UserInterface.DisplayUserOptions("Current Username: " + client.UserName);
             client.UserName = GetUserName();
             Query.UpdateClient(client);
-            //Query.UpdateUsername(client);
         }
 
         private void UpdateEmail()
@@ -429,7 +422,6 @@ namespace HumaneSociety
             UserInterface.DisplayUserOptions("Current email: " + client.Email);
             client.Email = GetEmail();
             Query.UpdateClient(client);
-            //Query.UpdateEmail(client);
         }
 
         public int GetZipCode()
@@ -463,7 +455,6 @@ namespace HumaneSociety
             UserInterface.DisplayUserOptions("Please enter your street address");
             client.Address.AddressLine1 = UserInterface.GetUserInput();
             Query.UpdateClient(client);
-            //Query.UpdateAddress(client);
 
         }
         public void UpdateName()
@@ -477,25 +468,21 @@ namespace HumaneSociety
                 UserInterface.DisplayUserOptions("Please enter your new first name.");
                 client.FirstName = UserInterface.GetUserInput();
                 Query.UpdateClient(client);
-                //Query.UpdateFirstName(client);
             }
             else if (input == "last" || input == "2")
             {
                 UserInterface.DisplayUserOptions("Please enter your new last name.");
                 client.LastName = UserInterface.GetUserInput();
                 Query.UpdateClient(client);
-                //Query.UpdateLastName(client);
             }
             else if(input == "both" || input == "3")
             {
                 UserInterface.DisplayUserOptions("Please enter your new first name.");
                 client.FirstName = UserInterface.GetUserInput();
                 Query.UpdateClient(client);
-                //Query.UpdateFirstName(client);
                 UserInterface.DisplayUserOptions("Please enter your new last name.");
                 client.LastName = UserInterface.GetUserInput();
                 Query.UpdateClient(client);
-                //Query.UpdateLastName(client);
             }
             else
             {
