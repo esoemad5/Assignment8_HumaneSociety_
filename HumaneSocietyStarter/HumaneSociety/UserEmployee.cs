@@ -114,11 +114,12 @@ namespace HumaneSociety
                 UserInterface.DisplayUserOptions("Animal not found please use different search criteria");
                 return;
             }
-            RunCheckMenu(animals[0]);
+            RunCheckMenu(Query.GetAnimalByID(animals[0].AnimalId));
         }
 
         private void RunCheckMenu(Animal animal)
         {
+            animal = Query.GetAnimalByID(animal.AnimalId);
             bool isFinished = false;
             Console.Clear();            
             while(!isFinished){                
@@ -202,6 +203,7 @@ namespace HumaneSociety
             else
             {
                 updates = UserInterface.EnterSearchCriteria(updates, input);
+                Query.EnterUpdate(animal, updates);
             }
         }
 
