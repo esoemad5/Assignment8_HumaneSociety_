@@ -454,7 +454,7 @@ namespace HumaneSociety
         internal static void GetAnimalsByCSV(string filename)
         {
             // EXTRA FIELD IN CSV???
-            // defaulting to going into /bin/debug ?
+            // defaulting to going looking inside /bin/debug when just given file name with no path
             
             //string[] allLines = File.ReadAllLines(filename);
             //var query = from l in allLines

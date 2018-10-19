@@ -136,7 +136,14 @@ namespace HumaneSociety
         {
             foreach(Animal animal in animals)
             {
-                Console.WriteLine(animal.AnimalId + " " + animal.Name + " " + animal.Species.Name);
+                if (animal.Species.Name == null)
+                {
+                    Console.WriteLine(animal.AnimalId + " " + animal.Name + " " + "(species not entered)");
+                }
+                else
+                {
+                    Console.WriteLine(animal.AnimalId + " " + animal.Name + " " + animal.Species.Name);
+                }
             }
         }
 
