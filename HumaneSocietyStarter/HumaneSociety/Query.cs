@@ -46,6 +46,42 @@ namespace HumaneSociety
             Console.ReadLine();
         }
 
+        public static void UpdateEmployee_FirstName(string newFirstName, Employee employee)
+        {
+            employee.FirstName = newFirstName;
+            TryToSubmitChanges();
+        }
+        public static void UpdateEmployee_LastName(string newLastName, Employee employee)
+        {
+            employee.LastName = newLastName;
+            TryToSubmitChanges();
+        }
+        public static void UpdateEmployee_UserName(string newUserName, Employee employee)
+        {
+            employee.UserName = newUserName;
+            TryToSubmitChanges();
+        }
+        public static void UpdateEmployee_Password(string newPassword, Employee employee)
+        {
+            employee.Password = newPassword;
+            TryToSubmitChanges();
+        }
+        public static void UpdateEmployee_EmployeeNumber(int newEmployeeNumber, Employee employee)
+        {
+            employee.EmployeeNumber = newEmployeeNumber;
+            TryToSubmitChanges();
+        }
+        public static void UpdateEmployee_Email(string newEmail, Employee employee)
+        {
+            employee.Email = newEmail;
+            TryToSubmitChanges();
+        }
+        //TODO
+        public static void UpdateEmployee_AssignedAnimals()
+        {
+
+        }
+
         internal static bool EmployeeNumberIsAlreadyInUse(int? employeeNumber)
         {
             try
