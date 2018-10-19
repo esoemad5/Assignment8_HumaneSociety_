@@ -1,18 +1,10 @@
-(10 points) As an adopter, I want to be able to search for animals based on multiple criteria, so that I can find the pet that is a right fit for me.
-    Need to deal with UI
-(10 points) As a developer, I want to use a delegate to perform CRUD operations on employees.
-    Make sure a delegate is used. All works, but delete doesnt work with FK in Animals table
 
 
 (10 points) As a humane society employee, I want to be able to update an animal’s status to “adopted” after it becomes adopted, so that it is known exactly what animals have been adopted.
-
-(10 points) As a humane society employee, I want to be able to keep track of which animals have had their shots as well as have the option to give an animal its shot if it has not received it yet, and update that in the database.
 
 (10 points) As a humane society employee, I want to be able to create new diet plans that include the type and amount of food the animals need and save it in the database. I also want to be able to update existing diet plans.
 
 
 
 
-(10 points) As a humane society employee, I want to be able to keep track of and update which room an animal is housed in (each animal will have its own room).
-    Pretty close. Methods exist. Need to test
-    
+(10 points) As a humane society employee, I want to be able to keep track of which animals have had their shots as well as have the option to give an animal its shot if it has not received it yet, and update that in the database.

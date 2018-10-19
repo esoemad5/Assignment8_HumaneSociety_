@@ -270,7 +270,7 @@ namespace HumaneSociety
     {
         internal static IQueryable<Adoption> GetPendingAdoptions()
         {
-            throw new NotImplementedException();
+            return db.Adoptions.Where(a => a.ApprovalStatus == "Pending");
         }
 
         internal static void RemoveAnimal(Animal animal)
@@ -383,7 +383,16 @@ namespace HumaneSociety
 
         internal static void UpdateAdoption(bool v, Adoption adoption)
         {
-            throw new NotImplementedException();
+            if (v)
+            {
+                adoption.ApprovalStatus = "Approved";
+            }
+            else
+            {
+                adoption.ApprovalStatus = "Denied";
+            }
+
+            TryToSubmitChanges();
         }
 
         internal static Room GetRoom(int animalId)
@@ -544,7 +553,6 @@ namespace HumaneSociety
             Console.WriteLine("\n");
         }
     }
-
 
     // CSV and db commit
     public static partial class Query

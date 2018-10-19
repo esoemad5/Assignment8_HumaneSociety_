@@ -89,11 +89,15 @@ namespace HumaneSociety
             if ((bool)UserInterface.GetBitData())
             {
                 Query.UpdateAdoption(true, adoption);
+                Console.WriteLine("Adoption Approved.");
             }
             else
             {
                 Query.UpdateAdoption(false, adoption);
+                Console.WriteLine("Adoption Denied.");
             }
+            UserInterface.DisplayUserOptions("Press any key to coninue");
+            Console.ReadKey();
         }
 
         private void CheckAnimalStatus()
