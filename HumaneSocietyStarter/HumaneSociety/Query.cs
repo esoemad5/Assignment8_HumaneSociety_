@@ -31,7 +31,6 @@ namespace HumaneSociety
             Employee target = db.Employees.Where(e => e.EmployeeNumber == employeeNumber).Single();
             UserInterface.DisplayEmployee(target);
             UserInterface.DisplayUserOptions("Which field would you like to change?");
-            // How to move animal assignment?
             UserInterface.UpdateEmployee_MenuSelection(target);
         }
 
@@ -64,11 +63,6 @@ namespace HumaneSociety
         {
             employee.Email = newEmail;
             TryToSubmitChanges();
-        }
-        //TODO
-        public static void UpdateEmployee_AssignedAnimals()
-        {
-            throw new NotImplementedException();
         }
 
         internal static void DeleteEmployee(Employee employee)
@@ -140,7 +134,6 @@ namespace HumaneSociety
             return db.Animals.Where(x => x.AnimalId == iD).Single();
         }
 
-        //TODO
         internal static void Adopt(Animal animal, Client client)
         {
             animal.AdoptionStatus = "Pending";
@@ -162,7 +155,6 @@ namespace HumaneSociety
             return db.USStates;
         }
 
-        //TODO
         internal static void AddNewClient(string firstName, string lastName, string username, string password, string email, string streetAddress, int zipCode, int state)
         {
             Address address = AddAddress(streetAddress, zipCode, state);
@@ -207,6 +199,11 @@ namespace HumaneSociety
         internal static IQueryable<Animal> SearchForAnimalByMultipleTraits() // Only lists all the animals right now. Doesn't search
         {
             return db.Animals.Where(x => true);
+        }
+
+        public static void _SearchForAnimalByMultipleTraits()
+        {
+
         }
     }
 
