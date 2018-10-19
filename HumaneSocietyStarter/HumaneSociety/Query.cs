@@ -411,6 +411,19 @@ namespace HumaneSociety
                     return;
             }            
         }
+        internal static void CreateDietPlan()
+        {
+            DietPlan newDietPlan = new DietPlan();
+            string newName = UserInterface.GetStringData("for the new diet plan", "the name");
+            string foodName = UserInterface.GetStringData("for the diet plan", "the new food type");
+            int totalCups = UserInterface.GetIntegerData("for the diet plan", "the amount of cups desired");
+
+            newDietPlan.Name = newName;
+            newDietPlan.FoodType = foodName;
+            newDietPlan.FoodAmountInCups = totalCups;
+            db.DietPlans.InsertOnSubmit(newDietPlan);
+            TryToSubmitChanges();            
+        }
 
         internal static void AddAnimal(Animal animal)
         {
