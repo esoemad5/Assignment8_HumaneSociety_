@@ -89,15 +89,11 @@ namespace HumaneSociety
             if ((bool)UserInterface.GetBitData())
             {
                 Query.UpdateAdoption(true, adoption);
-                Console.WriteLine("Adoption Approved.");
             }
             else
             {
                 Query.UpdateAdoption(false, adoption);
-                Console.WriteLine("Adoption Denied.");
             }
-            UserInterface.DisplayUserOptions("Press any key to coninue");
-            Console.ReadKey();
         }
 
         private void CheckAnimalStatus()
@@ -168,6 +164,7 @@ namespace HumaneSociety
         private void CheckShots(Animal animal)
         {
             List<string> shotInfo = new List<string>();
+            string newShotName;
             var shots = Query.GetShots(animal);
             foreach(AnimalShot shot in shots.ToList())
             {
@@ -178,7 +175,8 @@ namespace HumaneSociety
                 UserInterface.DisplayUserOptions(shotInfo);
                 if(UserInterface.GetBitData("Would you like to Update shots?"))
                 {
-                    Query.UpdateShot("booster", animal);
+                    Query.DisplayAvailableShots();
+                    Query.UpdateShot(UserInterface.GetStringData("the shot","the name of"), animal);
                 }
             }
             else
