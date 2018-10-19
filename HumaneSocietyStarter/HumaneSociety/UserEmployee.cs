@@ -225,27 +225,10 @@ namespace HumaneSociety
         }       
 
         private void RemoveAnimal()
-        {            
-            var animals = Query.SearchForAnimalByMultipleTraits().ToList();
-            if (animals.Count > 1)
-            {
-                UserInterface.DisplayUserOptions("Several animals found please refine your search.");
-                UserInterface.DisplayAnimals(animals);
-                UserInterface.DisplayUserOptions("Press enter to continue");
-                Console.ReadLine();
-                return;
-            }
-            else if (animals.Count < 1)
-            {
-                UserInterface.DisplayUserOptions("Animal not found please use different search criteria");
-                return;
-            }
-            var animal = animals[0];
-            List<string> options = new List<string>() { "Animal found:", animal.Name, animal.Species.Name, "would you like to delete?" };
-            if ((bool)UserInterface.GetBitData(options))
-            {
-                Query.RemoveAnimal(animal);
-            }
+        {
+            UserInterface.DisplayAnimals(Query.SearchForAnimalByMultipleTraits().ToList());
+            Console.WriteLine("Please enter the ID of the animal you would like to delete.");
+            Query.RemoveAnimal(UserInterface.GetIntegerData("of the Animal?", "the ID"));
         }
 
         private void AddAnimal()

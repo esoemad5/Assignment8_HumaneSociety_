@@ -273,10 +273,25 @@ namespace HumaneSociety
             return db.Adoptions.Where(a => a.ApprovalStatus == "Pending");
         }
 
-        internal static void RemoveAnimal(Animal animal)
+        internal static void RemoveAnimal(int animalId)
         {
-            db.Animals.DeleteOnSubmit(animal);
-            TryToSubmitChanges();
+            try
+            {
+                Animal animal = db.Animals.Where(a => a.AnimalId == animalId).Single();
+                Console.WriteLine("About to delete {0}, are you sure? (y/n)", animal.Name);
+                if(Console.ReadLine() == "y")
+                {
+                    db.Rooms.Where(r => r.AnimalId == animalId).Single().Animal = null;
+                    db.Animals.DeleteOnSubmit(animal);
+                    TryToSubmitChanges();
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                Console.WriteLine("No animal exists with that ID.");
+                Console.ReadLine();
+            }
+            
             // null checking
         }
 
@@ -285,7 +300,7 @@ namespace HumaneSociety
             var badAnimals = db.Animals.Where(a => a.SpeciesId == 9);
             foreach(Animal a in badAnimals)
             {
-                RemoveAnimal(a);
+                RemoveAnimal(a.AnimalId);
             }
         }
 
@@ -534,6 +549,7 @@ namespace HumaneSociety
                 db.Rooms.Where(r => r.RoomNumber == newRoomNumber).Single().AnimalId = animal.AnimalId;
                 TryToSubmitChanges();
             }
+
             catch (InvalidOperationException)
             {
                 Console.WriteLine("Multiple rooms with the same number or you have selected a room that does not exist. Try again.");
