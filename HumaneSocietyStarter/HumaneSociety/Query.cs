@@ -292,7 +292,6 @@ namespace HumaneSociety
                 Console.ReadLine();
             }
             
-            // null checking
         }
 
         internal static void RemoveSpecieslessAnimals()
@@ -305,27 +304,26 @@ namespace HumaneSociety
         }
 
         internal static Species GetSpecies()
-        {
-            //Employee target = db.Employees.Where(e => e.EmployeeNumber == employeeNumber).Single();
-            //Above is a better solution (it uses more LINQ which is what the instructors want
+        {            
             List<Species> allSpecies = new List<Species>();
             foreach (Species s in db.Species)
             {
                 allSpecies.Add(s);
             }
+            
             Species newSpecies;
             DisplaySpeciesOptions();
-            string input = UserInterface.GetStringData("menu number", "species");
+            int input = UserInterface.GetIntegerData("menu number", "species");
 
             try
             {
-                if (Int32.Parse(input) - 1 >= allSpecies.Count)
+                if (input - 1 >= allSpecies.Count)
                 {
                     return CreateSpecies();
                 }
                 else
                 {
-                    newSpecies = allSpecies[Int32.Parse(input) - 1];
+                    newSpecies = allSpecies[input - 1];
                     return newSpecies;
                 }
             }
@@ -393,16 +391,19 @@ namespace HumaneSociety
                     string newName = UserInterface.GetStringData("for the diet plan", "the new name");
                     DietPlanToUpdate.Name = newName;
                     TryToSubmitChanges();
+                    UserInterface.DisplayUserOptions("Diet Plan Name Updated!");
                     return;
                 case "food type":
                     string foodName = UserInterface.GetStringData("for the diet plan", "the new food type");
                     DietPlanToUpdate.FoodType = foodName;
                     TryToSubmitChanges();
+                    UserInterface.DisplayUserOptions("Food Type Updated!");
                     return;
                 case "total cups":
                     int totalCups = UserInterface.GetIntegerData("for the diet plan", "the amount of cups desired");
                     DietPlanToUpdate.FoodAmountInCups = totalCups;
                     TryToSubmitChanges();
+                    UserInterface.DisplayUserOptions("Total Cups Updated!");
                     return;
                 default:
                     Console.Clear();
@@ -421,8 +422,9 @@ namespace HumaneSociety
             newDietPlan.Name = newName;
             newDietPlan.FoodType = foodName;
             newDietPlan.FoodAmountInCups = totalCups;
-            db.DietPlans.InsertOnSubmit(newDietPlan);
-            TryToSubmitChanges();            
+            db.DietPlans.InsertOnSubmit(newDietPlan);            
+            TryToSubmitChanges();
+            UserInterface.DisplayUserOptions("Diet Plan Created!");
         }
 
         internal static void AddAnimal(Animal animal)
@@ -474,7 +476,7 @@ namespace HumaneSociety
         {
             // Null Check
             var nameExists = db.Employees.Where(e => e.UserName == username);
-            if (nameExists.Count() > 0)
+            if (nameExists != null)
             {
                 return true;
             }
@@ -490,7 +492,6 @@ namespace HumaneSociety
         internal static void UpdateShot(string v, Animal animal)
         {
             AnimalShot newShot = new AnimalShot();
-            //newShot.AnimalId = animal.AnimalId;
             if (CheckShot(v))
             {
                 newShot.Animal = db.Animals.Where(a => a.AnimalId == animal.AnimalId).Single();
@@ -535,7 +536,12 @@ namespace HumaneSociety
         {
             animal = db.Animals.Where(a => a.AnimalId == animal.AnimalId).Single();
             foreach (KeyValuePair<int, string> entry in updates)
+<<<<<<< HEAD
             {          
+=======
+            {
+                // "1. Species", "2. Name", "3. Age", "4. Demeanor", "5. Kid friendly", "6. Pet friendly", "7. Weight", "8. Finished";                
+>>>>>>> 868058ef2a5d4842b1e04908ef1ced0c2de09c04
                 switch (entry.Key)
                 {
                     case 1:
@@ -644,17 +650,11 @@ namespace HumaneSociety
     {
         internal static void GetAnimalsByCSV(string filename)
         {
-            // EXTRA FIELD IN CSV???
-            // defaulting to going looking inside /bin/debug when just given file name with no path
-            
-            //string[] allLines = File.ReadAllLines(filename);
-            //var query = from l in allLines
-            //            let newFile = l.Split(',').Select(e => e.First);
+            // Note: Automatically Checks in Bin folder For File if given file name without path
             var filteredResults = File.ReadAllLines(filename)
             .Select(l => l.Split(',').Select(s => s.Trim()).ToArray())
             .Where(a => true);
-
-            // Magic numbers?
+            
             foreach (string[] x in filteredResults)
             {
                 Animal newAnimal = new Animal();
@@ -675,7 +675,7 @@ namespace HumaneSociety
                 newAnimal.Species = db.Species.Where(s => s.Name == "Species Not Entered").Single();
                 AddAnimal(newAnimal); // animal needs employee?
                 ChangeAnimalRoom(newAnimal);
-                newAnimal = null; // reset values IS this needed?                
+                newAnimal = null;                
             }
         }
 
