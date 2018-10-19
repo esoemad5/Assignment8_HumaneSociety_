@@ -1,8 +1,0 @@
-Animals UPdate info doesnt work
-Remove animal doesnt work
-
-
-
-
-(10 points) As a humane society employee, I want to be able to create new diet plans that include the type and amount of food the animals need and save it in the database. I also want to be able to update existing diet plans.
-
