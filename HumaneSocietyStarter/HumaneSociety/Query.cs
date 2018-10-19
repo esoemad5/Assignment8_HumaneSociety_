@@ -376,6 +376,41 @@ namespace HumaneSociety
                 UserInterface.DisplayUserOptions("- " + d.Name);
             }
         }
+        internal static void DisplayDietPlanDetails(DietPlan dietPlan)
+        {
+            UserInterface.DisplayUserOptions("Name: " + dietPlan.Name);
+            UserInterface.DisplayUserOptions("Food Type: " + dietPlan.FoodType);
+            UserInterface.DisplayUserOptions("Total Cups: " + dietPlan.FoodAmountInCups);
+        }
+
+        internal static void UpdateDietPlan()
+        {
+            var DietPlanToUpdate = db.DietPlans.Where(d => d == GetDietPlan()).Single();
+            DisplayDietPlanDetails(DietPlanToUpdate);
+            switch(UserInterface.GetStringData("that you would like to change","the part of the Diet Plan").ToLower())
+            {
+                case "name":
+                    string newName = UserInterface.GetStringData("for the diet plan", "the new name");
+                    DietPlanToUpdate.Name = newName;
+                    TryToSubmitChanges();
+                    return;
+                case "food type":
+                    string foodName = UserInterface.GetStringData("for the diet plan", "the new food type");
+                    DietPlanToUpdate.FoodType = foodName;
+                    TryToSubmitChanges();
+                    return;
+                case "total cups":
+                    int totalCups = UserInterface.GetIntegerData("for the diet plan", "the amount of cups desired");
+                    DietPlanToUpdate.FoodAmountInCups = totalCups;
+                    TryToSubmitChanges();
+                    return;
+                default:
+                    Console.Clear();
+                    UserInterface.DisplayUserOptions("Invalid Entry Please Try Again!");
+                    UpdateDietPlan();
+                    return;
+            }            
+        }
 
         internal static void AddAnimal(Animal animal)
         {
