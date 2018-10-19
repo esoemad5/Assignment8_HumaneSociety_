@@ -136,15 +136,18 @@ namespace HumaneSociety
         {
             foreach(Animal animal in animals)
             {
-                try
-                {
-                    Console.WriteLine(animal.AnimalId + " " + animal.Name + " " + animal.Species.Name);
-                }
-
-                catch (Exception)
-                {
-                    Console.WriteLine(animal.AnimalId + " " + animal.Name + " " + "(species not given)");
-                }                
+                Console.WriteLine("--------------------");
+                Console.WriteLine("ID: {0}", animal.AnimalId);
+                Console.WriteLine("Name: {0}", animal.Name);
+                Console.WriteLine("Species: {0}", animal.Species.Name);
+                Console.WriteLine("Weight: {0}", animal.Weight);
+                Console.WriteLine("Age: {0}", animal.Age);
+                Console.WriteLine("DietPlan: {0}", animal.DietPlan.Name);
+                Console.WriteLine("Demeanor: {0}", animal.Demeanor);
+                Console.WriteLine("Kid Friendly: {0}", animal.KidFriendly);
+                Console.WriteLine("Pet Friendly: {0}", animal.PetFriendly);
+                Console.WriteLine("Gender: {0}", animal.Gender);
+                Console.WriteLine("Adoption Status: {0}", animal.AdoptionStatus);
             }
         }
 

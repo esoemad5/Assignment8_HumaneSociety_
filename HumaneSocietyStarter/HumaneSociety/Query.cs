@@ -12,7 +12,12 @@ namespace HumaneSociety
     {
         private static HumaneSocietyDataContext db = new HumaneSocietyDataContext();
 
-        // Admin queries
+        internal static void CreateEmployee(Employee employee)
+        {
+            db.Employees.InsertOnSubmit(employee);
+            TryToSubmitChanges();
+        }
+
         internal static void ReadEmployee(int? employeeId)
         {
             Employee employee = db.Employees.Where(e => e.EmployeeNumber == employeeId).Single();
@@ -20,32 +25,12 @@ namespace HumaneSociety
             UserInterface.DisplayUserOptions("Press any key to continue.");
             Console.ReadKey();
         }
-
-        internal static void DeleteEmployee(Employee employee)
-        {
-            Employee target = db.Employees.Where(e => e.EmployeeNumber == employee.EmployeeNumber && e.LastName == employee.LastName).Single();
-            Console.WriteLine("About to delete {0} {1}, EmployeeNumber: {2}. Are you sure?(y/n)", target.FirstName, target.LastName, target.EmployeeNumber);
-            if (Console.ReadKey().KeyChar == 'y')
-            {
-                db.Employees.DeleteOnSubmit(target);
-                TryToSubmitChanges();
-                Console.WriteLine("Employee deleted.");
-            }
-            else
-            {
-                Console.WriteLine("Delete aborted.");
-            }
-            Console.WriteLine("Press any key to return to the previous menu.");
-            Console.ReadKey(true);
-        }
-
-        //TODO
+        
         internal static void UpdateEmployee(int employeeNumber)
         {
             Employee target = db.Employees.Where(e => e.EmployeeNumber == employeeNumber).Single();
             UserInterface.DisplayEmployee(target);
             UserInterface.DisplayUserOptions("Which field would you like to change?");
-            // How to move animal assignment?
             UserInterface.UpdateEmployee_MenuSelection(target);
         }
 
@@ -79,10 +64,35 @@ namespace HumaneSociety
             employee.Email = newEmail;
             TryToSubmitChanges();
         }
-        //TODO
-        public static void UpdateEmployee_AssignedAnimals()
+
+        internal static void DeleteEmployee(Employee employee)
         {
-            throw new NotImplementedException();
+            Employee target = db.Employees.Where(e => e.EmployeeNumber == employee.EmployeeNumber && e.LastName == employee.LastName).Single();
+            Console.WriteLine("About to delete {0} {1}, EmployeeNumber: {2}. Are you sure?(y/n)", target.FirstName, target.LastName, target.EmployeeNumber);
+            if (Console.ReadKey().KeyChar == 'y')
+            {
+                RemoveEmployeeFromAnimal(target);
+                db.Employees.DeleteOnSubmit(target);
+                TryToSubmitChanges();
+                Console.WriteLine("Employee deleted.");
+            }
+            else
+            {
+                Console.WriteLine("Delete aborted.");
+            }
+            Console.WriteLine("Press any key to return to the previous menu.");
+            Console.ReadKey(true);
+        }
+
+        private static void RemoveEmployeeFromAnimal(Employee employee)
+        {
+            List<Animal> animalsAssignedToEmployee = db.Animals.Where(a => a.EmployeeId == employee.EmployeeId).ToList();
+            foreach(Animal animal in animalsAssignedToEmployee)
+            {
+                animal.EmployeeId = null;
+            }
+
+            TryToSubmitChanges();
         }
 
         internal static bool EmployeeNumberIsAlreadyInUse(int? employeeNumber)
@@ -90,24 +100,17 @@ namespace HumaneSociety
             try
             {
                 Employee test = db.Employees.Where(e => e.EmployeeNumber == employeeNumber).Single();
-                Console.WriteLine("Employee Number {0} is already in use", employeeNumber);
-                Console.WriteLine("Press any key to return to previous menu.");
+                UserInterface.DisplayUserOptions("Employee Number " + employeeNumber + " is already in use");
+                UserInterface.DisplayUserOptions("Press any key to return to previous menu.");
                 Console.ReadKey(true);
                 return true;
             }
             catch (Exception)
             {
-                Console.WriteLine("Valid number");
+                UserInterface.DisplayUserOptions("Valid number");
                 return false;
             }
         }
-
-        internal static void CreateEmployee(Employee employee)
-        {
-            db.Employees.InsertOnSubmit(employee);
-            TryToSubmitChanges();
-        }
-
     }
 
     // Customer
@@ -117,7 +120,6 @@ namespace HumaneSociety
         {
             Client outputClient = db.Clients.
                 Where(u => u.UserName == userName && u.Password == password).
-                /*Could put .AsEnumerable() here. Doesn't seem neccesary. Might not be the case elsewhere*/
                 Single();
             return outputClient;
         }
@@ -132,7 +134,6 @@ namespace HumaneSociety
             return db.Animals.Where(x => x.AnimalId == iD).Single();
         }
 
-        //TODO
         internal static void Adopt(Animal animal, Client client)
         {
             animal.AdoptionStatus = "Pending";
@@ -154,18 +155,9 @@ namespace HumaneSociety
             return db.USStates;
         }
 
-        //TODO
         internal static void AddNewClient(string firstName, string lastName, string username, string password, string email, string streetAddress, int zipCode, int state)
         {
-            Console.WriteLine("In AddNewClient");
-            // TODO make this into 2 methods
-            Address address = new Address();
-            address.AddressLine1 = streetAddress;
-            address.Zipcode = zipCode;
-            address.USStateId = state;
-            db.Addresses.InsertOnSubmit(address);
-
-            TryToSubmitChanges();
+            Address address = AddAddress(streetAddress, zipCode, state);
 
             Client client = new Client();
             client.FirstName = firstName;
@@ -178,11 +170,20 @@ namespace HumaneSociety
 
             TryToSubmitChanges();
         }
+        private static Address AddAddress(string streetAddress, int zipCode, int state)
+        {
+            Address address = new Address();
+            address.AddressLine1 = streetAddress;
+            address.Zipcode = zipCode;
+            address.USStateId = state;
+
+            db.Addresses.InsertOnSubmit(address);
+            TryToSubmitChanges();
+            return address;
+        }
 
         internal static void UpdateClient(Client client)
         {
-            //Client updateClient = db.Clients.Where(c => c.ClientId == client.ClientId).Single();
-            //updateClient = client;
             TryToSubmitChanges();
         }
 
@@ -198,6 +199,11 @@ namespace HumaneSociety
         internal static IQueryable<Animal> SearchForAnimalByMultipleTraits() // Only lists all the animals right now. Doesn't search
         {
             return db.Animals.Where(x => true);
+        }
+
+        public static void _SearchForAnimalByMultipleTraits()
+        {
+
         }
     }
 
