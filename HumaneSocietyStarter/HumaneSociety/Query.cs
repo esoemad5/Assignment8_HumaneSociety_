@@ -363,16 +363,16 @@ namespace HumaneSociety
             //newShot.AnimalId = animal.AnimalId;
             if (CheckShot(v))
             {
-                newShot.Animal = animal;
-
+                newShot.Animal = db.Animals.Where(a => a.AnimalId == animal.AnimalId).Single();
                 newShot.DateReceived = DateTime.Now;
                 newShot.Shot = db.Shots.Where(s => s.Name == v).Single();
                 db.AnimalShots.InsertOnSubmit(newShot);
                 TryToSubmitChanges();
+                UserInterface.DisplayUserOptions("Shots Updated!");
             }
             else
             {
-                Console.WriteLine("Shot does not exist! \n");
+                UserInterface.DisplayUserOptions("Shot does not exist!");
             }
         }
 
@@ -384,6 +384,7 @@ namespace HumaneSociety
                 if (s.Name == shotName)
                 {
                     shotExists = true;
+                    return shotExists;
                 }
             }
             return shotExists;

@@ -179,7 +179,7 @@ namespace HumaneSociety
             }
             else
             {
-                if (UserInterface.GetBitData("Would you like to Update shots?"))
+                if (UserInterface.GetBitData("No shots. Would you like to Update shots?"))
                 {
                     Query.UpdateShot("booster", animal);
                 }
