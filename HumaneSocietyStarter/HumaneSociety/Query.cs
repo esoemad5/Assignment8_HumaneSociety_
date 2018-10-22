@@ -536,8 +536,7 @@ namespace HumaneSociety
         {
             animal = db.Animals.Where(a => a.AnimalId == animal.AnimalId).Single();
             foreach (KeyValuePair<int, string> entry in updates)
-            {
-                // "1. Species", "2. Name", "3. Age", "4. Demeanor", "5. Kid friendly", "6. Pet friendly", "7. Weight", "8. Finished";                
+            {          
                 switch (entry.Key)
                 {
                     case 1:
