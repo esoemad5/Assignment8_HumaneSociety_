@@ -27,7 +27,7 @@ namespace HumaneSociety
 
         protected override void RunUserMenus()
         {
-            List<string> options = new List<string>() { "What would you like to do? (select number of choice)", "1. Add animal", "2. Remove Anmial", "3. Check Animal Status",  "4. Approve Adoption", "5. Create New Diet Plan", "6. Update A Diet Plan" };
+            List<string> options = new List<string>() { "What would you like to do? (select number of choice)", "1. Add animal", "2. Remove Anmial", "3. Check Animal Status",  "4. Approve Adoption", "5. Create New Diet Plan", "6. Update A Diet Plan", "7. Import Animals From CSV" };
             UserInterface.DisplayUserOptions(options);
             string input = UserInterface.GetUserInput();
             RunUserInput(input);
@@ -59,6 +59,10 @@ namespace HumaneSociety
                     return;
                 case "6":
                     Query.UpdateDietPlan();
+                    RunUserMenus();
+                    return;
+                case "7":
+                    Query.GetAnimalsByCSV("animals.csv"); // change to user input
                     RunUserMenus();
                     return;
                 default:

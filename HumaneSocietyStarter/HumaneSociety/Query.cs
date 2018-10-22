@@ -590,7 +590,7 @@ namespace HumaneSociety
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                //Console.WriteLine(e.Message);
             }
             DisplayAvailableRooms();
             int newRoomNumber = UserInterface.GetIntegerData("room number", "the new");
